@@ -1,0 +1,172 @@
+﻿@{
+    ViewData["Title"] = "미승인 사용자 관리";
+    Layout = "~/Views/Shared/_LayoutDataView.cshtml";
+}
+
+@using App.Model;
+@model List<Users>;
+
+<div class="bg-light border rounded-3" style="margin:15px;">
+    <div class="list-group list-group-flush border-bottom scrollarea" style="margin:15px;">
+        <div style="margin-top:20px;margin-bottom:20px;">
+            <h3>미승인 사용자 관리</h3>
+            <hr />
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="locationAdminPage()">사용자 관리</button>
+            </div>
+        </div>
+
+        <div class="table-responsive bg-white">
+            <table class="table table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col" style="width: 100px;">ID</th>
+                        <th scope="col" style="width: 100px;">이메일</th>
+                        <th scope="col" style="width: 100px;">이름</th>
+                        <th scope="col" style="width: 100px;">부서</th>
+                        <th scope="col" style="width: 100px;">연락처</th>
+                        <th scope="col" style="width: 10%;"></th>
+                    </tr>
+                </thead>
+                <tbody style="overflow: auto;">
+                    @{
+                        if (Model.Count < 1)
+                        {
+                            <tr>
+                                <td colspan="6" class='text-center' style='padding:10px;'>
+                                    <h5>조회된 데이터가 없습니다!</h5>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td id="USER_ID">@item.USER_CD</td>
+                                    <td id="USER_EMAIL">@item.USER_EMAIL</td>
+                                    <td id="USER_NM">@item.USER_NM</td>
+                                    <td id="USER_DEPT">@item.USER_DEPT</td>
+                                    <td id="USER_CONTACT">@item.USER_CONTACT</td>
+                                    <td class="text-center">
+
+                                        <button type="button" class="btn btn-success btn-sm" id="approve" data-bs-toggle="modal" data-bs-target="#UpdateUserInfoModal" data-bs-whatever="" style="margin:2px;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
+                                                <path d="M13.485 1.431a1.473 1.473 0 0 1 2.104 2.062l-7.84 9.801a1.473 1.473 0 0 1-2.12.04L.431 8.138a1.473 1.473 0 0 1 2.084-2.083l4.111 4.112 6.82-8.69a.486.486 0 0 1 .04-.045z" />
+                                            </svg>
+                                        </button>
+
+                                        <button type="button" class="btn btn-danger btn-sm" style="margin:2px;" data-bs-toggle="modal" data-bs-target="#RemoveConfirmModal">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z" />
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RemoveConfirmModal" tabindex="-1" aria-labelledby="RemoveConfirmModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">미승인 계정 삭제</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Admin" asp-action="DeleteUser" id="FormRemoveUnApprovalAccount">
+                    <div class="mb-3">
+                        <label for="UserNm" class="form-label">UserCd</label>
+                        <input type="text" class="form-control" id="RemoveUserCd" name="UserCd" rows="3" required readonly>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserId" class="form-label">UserId</label>
+                        <input type="text" class="form-control" id="RemoveUserId" name="UserEmail" rows="3" required readonly>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormRemoveUnApprovalAccount">삭제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="UpdateUserInfoModal" tabindex="-1" aria-labelledby="UpdateUserInfoModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">계정 승인</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Admin" asp-action="GrantAuthorization" id="FormApprovalAccount">
+                    <div class="mb-3">
+                        <label for="UserCd" class="form-label">사용자 코드</label>
+                        <input type="text" class="form-control" placeholder="부서를 입력하세요." id="UserCd" name="UserCd" rows="3">
+                        <div class="invalid-feedback">
+                            사용자 코드를 입력해주십시오.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserNm" class="form-label">사용자명</label>
+                        <input type="text" class="form-control" placeholder="성명을 입력하세요." id="UserNm" name="UserNm" rows="3" required>
+                        <div class="invalid-feedback">
+                            이름을 입력해주십시오.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserEmail" class="form-label">이메일</label>
+                        <input type="text" class="form-control" placeholder="이메일을 입력하세요." id="UserEmail" name="UserEmail" value="" rows="3" required>
+                        <div class="invalid-feedback">
+                            이메일을 입력해주십시오.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserContact" class="form-label">연락처</label>
+                        <input type="text" class="form-control" placeholder="연락처를 입력하세요." id="UserContact" name="UserContact" rows="3">
+                        <div class="invalid-feedback">
+                            연락처를 입력해주십시오.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="UserDept" class="form-label">부서</label>
+                        <input type="text" class="form-control" placeholder="부서를 입력하세요." id="UserDept" name="UserDept" rows="3">
+                        <div class="invalid-feedback">
+                            부서를 입력해주십시오.
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="AuthorizationName" class="form-label">권한</label>
+                        <select id="AuthorizationName" place name="AuthorizationName" class="form-select" required>
+                            <option disabled selected hidden>권한을 선택하세요.</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            권한을 선택해주십시오.
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormApprovalAccount">등록</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/admin.js" asp-append-version="true"></script>

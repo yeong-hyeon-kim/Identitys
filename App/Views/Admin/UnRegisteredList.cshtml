@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "미등록 사용자 관리";
+    Layout = "~/Views/Shared/_LayoutDataView.cshtml";
+}
+
+@using App.Model;
+@model List<Users>;
+
+<div class="bg-light border rounded-3" style="margin:15px;">
+    <div class="list-group list-group-flush border-bottom scrollarea" style="margin:15px;">
+        <div style="margin-top:20px;margin-bottom:20px;">
+            <h3>미등록 사용자 관리</h3>
+            <hr />
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="locationAdminPage()">사용자 관리</button>
+            </div>
+        </div>
+
+        <div class="table-responsive bg-white">
+            <table class="table table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col" style="width: 100px;">ID</th>
+                        <th scope="col" style="width: 100px;">이메일</th>
+                        <th scope="col" style="width: 100px;">이름</th>
+                        <th scope="col" style="width: 100px;">부서</th>
+                        <th scope="col" style="width: 100px;">연락처</th>
+                    </tr>
+                </thead>
+                <tbody style="overflow: auto;">
+                    @{
+                        if (Model.Count < 1)
+                        {
+                            <tr>
+                                <td colspan="5" class='text-center' style='padding:10px;'>
+                                    <h5>조회된 데이터가 없습니다!</h5>
+                                </td>
+                            </tr>
+                        }
+
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td id="USER_ID">@item.USER_CD</td>
+                                <td id="USER_EMAIL">@item.USER_EMAIL</td>
+                                <td id="USER_NM">@item.USER_NM</td>
+                                <td id="USER_DEPT">@item.USER_DEPT</td>
+                                <td id="USER_CONTACT">@item.USER_CONTACT</td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
