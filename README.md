@@ -55,7 +55,7 @@
 * `User Database`
 > "APP.DB": "Server=`Server IP`, `Port`; Database=APP.DB; User Id=`Login User ID`; Password=`Login User PW`;"
 * `Identity Database`
-> "APP.DB": "Server=`Server IP`, `Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
+> "APP.INDENTITY": "Server=`Server IP`, `Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
 
 ### Database Update(Package Manage Console)
 * `User Database`
