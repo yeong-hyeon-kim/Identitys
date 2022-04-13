@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.Encodings.Web;
 
-namespace ALIMS_Mobile_Web.Areas.Identity.Pages.Account.Manage
+namespace App.Areas.Identity.Pages.Account.Manage
 {
     public class EnableAuthenticatorModel : PageModel
     {
@@ -142,7 +142,7 @@ namespace ALIMS_Mobile_Web.Areas.Identity.Pages.Account.Manage
         {
             return string.Format(
                 AuthenticatorUriFormat,
-                _urlEncoder.Encode("ALIMS_Mobile_Web"),
+                _urlEncoder.Encode("App"),
                 _urlEncoder.Encode(email),
                 unformattedKey);
         }
