@@ -51,6 +51,7 @@ namespace ALIMS_Mobile_Web.Areas.Identity.Pages.Account
             [Display(Name = "비밀번호")]
             public string Password { get; set; }
 
+            [Required(ErrorMessage = "비밀번호는 반드시 입력해야합니다.")]
             [DataType(DataType.Password)]
             [Display(Name = "비밀번호 확인")]
             [Compare("Password", ErrorMessage = "비밀번호가 일치하지 않습니다.")]
@@ -108,6 +109,20 @@ namespace ALIMS_Mobile_Web.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
+                    switch (error.Code)
+                    {
+                        case "PasswordRequiresNonAlphanumeric":
+                            error.Description = "비밀번호에는 영숫자가 아닌 문자가 하나 이상 있어야 합니다.";
+                            break;
+                        case "PasswordRequiresLower":
+                            error.Description = "비밀번호에는 소문자가 포함되어야 합니다.";
+                            break;
+                        case "PasswordRequiresUpper":
+                            error.Description = "비밀번호에는 대문자가 포함되어야 합니다.";
+                            break;
+                        default:
+                            break;
+                    }
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
