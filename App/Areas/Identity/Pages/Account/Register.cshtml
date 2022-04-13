@@ -2,7 +2,9 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "사용자 등록";
-    string returnUrl = Request.Scheme + Request.Host + Request.Path;
+    //string returnUrl = Request.Scheme + Request.Host + Request.Path;
+    string returnUrl = $"~/Identity/Account/Register";
+
 }
 
 <h3>사용자 등록</h3>

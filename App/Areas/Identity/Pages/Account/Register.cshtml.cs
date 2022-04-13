@@ -62,9 +62,9 @@ namespace App.Areas.Identity.Pages.Account
         {
             if (returnUrl == null)
             {
-                returnUrl = Request.Scheme + Request.Host + Request.Path;
+                returnUrl = $"~/Identity/Account/Register";
             }
-
+            
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
@@ -73,7 +73,7 @@ namespace App.Areas.Identity.Pages.Account
         {
             if (returnUrl == null)
             {
-                returnUrl = Request.Scheme + Request.Host + Request.Path;
+                returnUrl = $"~/Identity/Account/Register";
             }
 
             returnUrl = returnUrl ?? Url.Content("~/");
