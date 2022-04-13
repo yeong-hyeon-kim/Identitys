@@ -43,3 +43,19 @@
    3. 역할(권한)을 부여하여 승인합니다.
 5. 미등록 사용자
    1. `Users` 사용자 등록은 되어있으나 `Identity` 사용자 등록은 되어있지 않은 사용자 목록을 표시합니다.
+
+## 프로젝트 (Project Bulid)
+
+<hr>
+
+### Database Connection(appsettings)
+* `User Database`
+>> "APP.DB": "Server=`Server IP, Port`; Database=APP.DB; User Id=`Login User ID`; Password=`Login User PW`;"
+* `Identity Database`
+>> "APP.DB": "Server=`Server IP, Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
+
+### Database Update(Package Manage Console)
+* `User Database`
+>> "update-database -Context `AppDbContext`"
+* `Identity Database`
+>> "update-database -Context `ApplicationDbContext`"
