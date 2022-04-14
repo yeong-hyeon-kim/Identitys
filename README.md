@@ -52,7 +52,7 @@
 
    <br>
    
-   ![미승인 사용자](./Snapshot/AuthorizationLists.PNG)
+   ![미승인 사용자](./Snapshot/Authorization.PNG)
 5. 미등록 사용자
    1. `Users` 사용자 등록은 되어있으나 `Identity` 사용자 등록은 되어있지 않은 사용자 목록을 표시합니다.
 
