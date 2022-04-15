@@ -43,22 +43,22 @@ namespace App.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "이메일은 반드시 입력해야합니다.")]
             [EmailAddress]
             [Display(Name = "이메일")]
-            public string Email { get; set; }
+            public string? Email { get; set; }
 
             [Required(ErrorMessage = "비밀번호는 반드시 입력해야합니다.")]
             [StringLength(100, ErrorMessage = "{0}는 반드시 {2}~{1} 자리 사이로 입력해야합니다.", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "비밀번호")]
-            public string Password { get; set; }
+            public string? Password { get; set; }
 
             [Required(ErrorMessage = "비밀번호는 반드시 입력해야합니다.")]
             [DataType(DataType.Password)]
             [Display(Name = "비밀번호 확인")]
             [Compare("Password", ErrorMessage = "비밀번호가 일치하지 않습니다.")]
-            public string ConfirmPassword { get; set; }
+            public string? ConfirmPassword { get; set; }
         }
 
-        public async Task OnGetAsync(string returnUrl = null)
+        public async Task OnGetAsync(string? returnUrl = null)
         {
             if (returnUrl == null)
             {
@@ -69,7 +69,7 @@ namespace App.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
         {
             if (returnUrl == null)
             {
