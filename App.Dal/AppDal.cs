@@ -83,6 +83,9 @@ namespace App.DAL
         /// <param name="UserContact">연락처</param>
         public void UpdateUser(string UserCd, string UserDept, string UserContact)
         {
+            string UserIdentity = string.Empty;
+
+            // User PhoneNumber
             using (var db = _context)
             {
                 try
@@ -90,8 +93,28 @@ namespace App.DAL
                     var Model = db.USERS.First(x => x.USER_CD.Equals(UserCd));
                     Model.USER_DEPT = UserDept;
                     Model.USER_CONTACT = UserContact;
+                    UserIdentity = Model.USER_EMAIL;
 
                     db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+
+            // Identity PhoneNumber
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(UserIdentity))
+                    {
+                        var Model = db.Users.First(x => x.Email.Equals(UserIdentity));
+                        Model.PhoneNumber = UserContact;
+
+                        db.SaveChanges();
+                    }
                 }
                 catch (Exception e)
                 {
