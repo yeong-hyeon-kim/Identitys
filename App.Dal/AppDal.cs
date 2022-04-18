@@ -162,6 +162,11 @@ namespace App.DAL
             }
         }
 
+        /// <summary>
+        /// 역할 업데이트
+        /// </summary>
+        /// <param name="RoleId">Identity Role Id</param>
+        /// <param name="RoleNm">Identity Role Name</param>
         public void UpdateRole(string RoleId, string RoleNm)
         {
             using (var db = _identity_context)
@@ -182,6 +187,11 @@ namespace App.DAL
             }
         }
 
+        /// <summary>
+        /// 역할 추가
+        /// </summary>
+        /// <param name="RoleId">Role Id</param>
+        /// <param name="RoleNm"></param>
         public void InsertRole(string RoleId, string RoleNm)
         {
             using (var db = _identity_context)
@@ -542,6 +552,11 @@ namespace App.DAL
             }
         }
 
+        /// <summary>
+        /// 특정 사용자에 부여된 역할 리스트
+        /// </summary>
+        /// <param name="UserEmail">사용자 이메일</param>
+        /// <param name="RoleName">역할 이름</param>
         public void OverlapAuthorization(string UserEmail, string RoleName)
         {
             try
