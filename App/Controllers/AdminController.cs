@@ -32,6 +32,11 @@ namespace App.Controllers
             return View(_AppBll.GetRolesList());
         }
 
+        public IActionResult LockList()
+        {
+            return View(_AppBll.GetLockList());
+        }
+
         /// <summary>
         /// 사용자 권한 부여
         /// </summary>
@@ -90,6 +95,14 @@ namespace App.Controllers
             _AppBll.UpdateRole(RoleId, RoleName);
 
             return Redirect("~/Admin/RolesList");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteLock(string LockUserId, bool LockoutEnabled)
+        {
+            _AppBll.DeleteLock(LockUserId, LockoutEnabled);
+
+            return Redirect("~/Admin/LockList");
         }
     }
 }

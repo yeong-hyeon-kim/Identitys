@@ -22,6 +22,10 @@ function locationAccountRegisterPage() {
     location.href = defaultURL + "Identity/Account/Register";
 }
 
-function locationSearchAuthorizationListPage() {
+function locationRolesListPage() {
     location.href = defaultURL + "Admin/RolesList";
+}
+
+function locationLockListPage() {
+    location.href = defaultURL + "Admin/LockList";
 }

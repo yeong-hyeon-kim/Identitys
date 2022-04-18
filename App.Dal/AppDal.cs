@@ -360,7 +360,6 @@ namespace App.DAL
 
             try
             {
-
                 List<Users> UserList;
                 List<IdentityUser> IdentityUser;
                 List<IdentityUserRole<string>> IdentityUserRoles;
@@ -539,8 +538,11 @@ namespace App.DAL
                     var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
                     var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
 
-                    Model.UserId = listUser.Id;
-                    Model.RoleId = listRole.Id;
+                    if (listUser != null && listRole != null)
+                    {
+                        Model.UserId = listUser.Id;
+                        Model.RoleId = listRole.Id;
+                    }
 
                     db.UserRoles.Remove(Model);
                     db.SaveChanges();
@@ -605,6 +607,97 @@ namespace App.DAL
                     return roles;
                 }
             }
+        }
+
+        /// <summary>
+        /// 계정 잠금 해제
+        /// </summary>
+        /// <param name="LockUserId">사용자 ID</param>
+        /// <param name="LockoutEnabled">잠금 사용 여부</param>
+        public void DeleteLock(string LockUserId, bool LockoutEnabled)
+        {
+            string UserEmail = string.Empty;
+
+            using (var db = _context)
+            {
+                try
+                {
+                    var Model = db.USERS.First(x => x.USER_CD.Equals(LockUserId));
+
+                    if (Model != null)
+                    {
+                        UserEmail = Model.USER_EMAIL;
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(UserEmail))
+                    {
+                        var Model = db.Users.First(x => x.Email.Equals(UserEmail));
+
+                        // Lcck Date > null
+                        Model.LockoutEnd = null;
+                        // 체크 시 Lock 사용 안함. 
+                        Model.LockoutEnabled = !LockoutEnabled;
+
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
+        public List<Users> GetLockList()
+        {
+            // Identity Lock List
+            dynamic? LockList = null;
+            List<Users> LockUserList = new List<Users>();
+
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    LockList = db.Users.Where(x => x.LockoutEnabled.Equals(true) && x.LockoutEnd > DateTimeOffset.Now).ToList();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+
+            using (var db = _context)
+            {
+                try
+                {
+                    if (LockList != null)
+                    {
+                        foreach (var item in LockList)
+                        {
+                            string UserEmail = item.Email.ToString();
+                            LockUserList = db.USERS.Where(x => x.USER_EMAIL.Equals(UserEmail)).ToList();
+
+                            return LockUserList;
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+
+            return LockUserList;
         }
         #endregion
     }

@@ -1,0 +1,119 @@
+﻿@{
+    ViewData["Title"] = "잠금 계정 조회";
+    Layout = "~/Views/Shared/_LayoutDataView.cshtml";
+}
+
+@using App.Model;
+@model List<Users>;
+
+<div class="bg-light border rounded-3" style="margin:15px;">
+    <div class="list-group list-group-flush border-bottom scrollarea" style="margin:15px;">
+        <div style="margin-top:20px;margin-bottom:20px;">
+            <h3>잠금 계정 조회</h3>
+            <hr />
+
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="locationAdminPage()">사용자 관리</button>
+            </div>
+        </div>
+
+        <div class="table-responsive bg-white">
+            <table class="table table-hover">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col" style="width: 100px;">ID</th>
+                        <th scope="col" style="width: 100px;">사용자</th>
+                        <th scope="col" style="width: 100px;">이메일</th>
+                        <th scope="col" style="width: 100px;"></th>
+                        <th scope="col" style="width: 100px;"></th>
+                        <th scope="col" style="width: 100px;"></th>
+                        <th scope="col" style="width: 100px;"></th>
+                        <th scope="col" style="width: 10%;"></th>
+                    </tr>
+                </thead>
+                <tbody style="overflow: auto;">
+                    @{
+                        if (Model.Count < 1)
+                        {
+                            <tr>
+                                <td colspan="8" class='text-center' style='padding:12px;'>
+                                    <h5>조회된 데이터가 없습니다!</h5>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td id="USER_CD_@item.USER_CD">@item.USER_CD</td>
+                                    <td id="USER_NM_@item.USER_NM">@item.USER_NM</td>
+                                    <td id="USER_EMAILS_@item.USER_EMAIL">@item.USER_EMAIL</td>
+                                    <td id="USER_DEPT_@item.USER_DEPT"></td>
+                                    <td id="USER_CONTACT_@item.USER_CONTACT"></td>
+                                    <td id="ROLE_NM_@item.USER_NM"></td>
+                                    <td id="ROLE_NM_@item.USER_CD"></td>
+
+                                    <td class="text-center">
+                                        <button type='button' class='btn btn-outline-danger' data-bs-toggle="modal" data-bs-target="#RemoveLockConfirmModal" data-bs-whatever="@item.USER_CD">
+                                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>
+                                                <path d='M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z' />;
+                                            </svg>
+                                        </button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="RemoveLockConfirmModal" tabindex="-1" aria-labelledby="RemoveLockConfirmModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">잠금 해제</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Admin" asp-action="DeleteLock" id="FormDeleteLock">
+                    <div class="mb-3">
+                        <label for="LockUserId" class="form-label">User ID</label>
+                        <input type="text" class="form-control" id="LockUserId" name="LockUserId" rows="3" required readonly>
+                    </div>
+                    <div class="mb-3">
+                        <label for="LockoutEnabled" class="form-label">잠금 사용 안함</label>
+                        <input type="checkbox" id="LockoutEnabled" name="LockoutEnabled" rows="3">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormDeleteLock">해제</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // 잠금 해제 확인 다이얼로그
+    let RemoveRockModal = document.getElementById('RemoveLockConfirmModal')
+    RemoveRockModal.addEventListener('show.bs.modal', function (event) {
+        let modalTitle = RemoveRockModal.querySelector('.modal-title')
+        modalTitle.textContent = '알림'
+
+        let button = event.relatedTarget;
+        let recipient = button.getAttribute('data-bs-whatever')
+        recipient = $("#USER_CD_" + recipient).text() + "##" + recipient;
+
+        $("#LockUserId").val($("#USER_CD").text());
+
+        if (recipient !== "##null") {
+            let RoleId = recipient.split("##")[0];
+            $("#LockUserId").val(RoleId);
+        }
+    })
+</script>

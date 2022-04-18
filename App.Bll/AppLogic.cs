@@ -43,6 +43,15 @@ namespace App.BLL
         {
             return _appDal.GetRolesList();
         }
+        public List<Users> GetLockList()
+        {
+            return _appDal.GetLockList();
+        }
+
+        public void DeleteLock(string LockUserId, bool LockoutEnabled)
+        {
+            _appDal.DeleteLock(LockUserId, LockoutEnabled);
+        }
 
         public void GrantAuthorizationUser(string UserEmail, string RoleName)
         {
@@ -73,8 +82,6 @@ namespace App.BLL
         {
             _appDal.UpdateRole(RoleId, RoleNm);
         }
-
-
         #endregion
     }
 }
