@@ -23,5 +23,5 @@ function locationAccountRegisterPage() {
 }
 
 function locationSearchAuthorizationListPage() {
-    location.href = defaultURL + "Admin/AuthorizationList";
+    location.href = defaultURL + "Admin/RolesList";
 }

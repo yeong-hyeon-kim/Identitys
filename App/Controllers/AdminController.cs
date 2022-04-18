@@ -27,7 +27,7 @@ namespace App.Controllers
             return View(_AppBll.GetIdentityNullUsers());
         }
 
-        public IActionResult AuthorizationList()
+        public IActionResult RolesList()
         {
             return View(_AppBll.GetRolesList());
         }
@@ -73,7 +73,7 @@ namespace App.Controllers
         {
             _AppBll.DeleteRole(RoleId);
 
-            return Redirect("~/Admin/AuthorizationList");
+            return Redirect("~/Admin/RolesList");
         }
 
         [HttpPost]
@@ -81,7 +81,7 @@ namespace App.Controllers
         {
             _AppBll.InsertRole(RoleId, RoleName);
 
-            return Redirect("~/Admin/AuthorizationList");
+            return Redirect("~/Admin/RolesList");
         }
 
         [HttpPost]
@@ -89,7 +89,7 @@ namespace App.Controllers
         {
             _AppBll.UpdateRole(RoleId, RoleName);
 
-            return Redirect("~/Admin/AuthorizationList");
+            return Redirect("~/Admin/RolesList");
         }
     }
 }
