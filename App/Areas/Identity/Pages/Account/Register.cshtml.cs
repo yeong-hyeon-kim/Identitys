@@ -64,7 +64,7 @@ namespace App.Areas.Identity.Pages.Account
             {
                 returnUrl = $"~/Identity/Account/Register";
             }
-            
+
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
