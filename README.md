@@ -17,11 +17,12 @@
    2. 사용자 조회  
    3. 사용자 업데이트
    4. 사용자 제거
+   5. 사용자 잠금 해제
 2. 역할`(Identity Roles)` 관리
    1. 권한 등록
-   1. 권한 조회  
-   2. 권한 업데이트
-   3. 권한 제거
+   2. 권한 조회  
+   3. 권한 업데이트
+   4. 권한 제거
 
 ## 세부 설명(Detail Description)
 
@@ -55,8 +56,14 @@
    ![미승인 사용자](./Snapshot/Authorization.PNG)
 5. 미등록 사용자
    1. `Users` 사용자 등록은 되어있으나 `Identity` 사용자 등록은 되어있지 않은 사용자 목록을 표시합니다.
+6. 사용자 잠금 해제
+   1. ID 및 PW 오류로 계정이 잠금 상태일 경우 해제합니다.
 
-## 프로젝트 (Project Bulid)
+   <br>
+
+   ![사용자 잠금 해제](./Snapshot/AccountLock.PNG)
+
+## 프로젝트 빌드(Project Bulid)
 
 <hr>
 
