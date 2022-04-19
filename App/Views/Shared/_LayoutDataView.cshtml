@@ -80,27 +80,6 @@
     <script>
         var defaultURL = window.location.protocol + "//" + window.location.host + "/";
         var defaultRequesteURL = defaultURL + "Api/";
-
-        var userEmail = $('#UserEmail').text();
-        var userTeamNm = ""
-        var userNm = "";
-
-        (function () {
-            //requestUserInfo();
-        }());
-
-        // 사용자 정보 요청
-        //function requestUserInfo(UserEmail) {
-        //    let RequestURL = defaultRequesteURL + "GetUserInfo?UserEmail=" + userEmail
-        //    $.getJSON(RequestURL, getUserInfo);
-        //}
-
-        // 사용자 정보 표시
-        //function getUserInfo(data) {
-        //    userTeamNm = data[0]["USER_DEPT"];
-        //    userNm = data[0]["USER_NM"];
-        //    $('#UserEmail').text(userNm + "(" + userTeamNm + ")" + "님");
-        //}
     </script>
 
     @RenderSection("Scripts", required: false)

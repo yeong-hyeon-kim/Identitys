@@ -87,9 +87,6 @@ RemoveUserModal.addEventListener('show.bs.modal', function (event) {
     let recipient = button.getAttribute('data-bs-whatever')
     recipient = $("#USER_ID_" + recipient).text() + "##" + recipient;
 
-    console.log($("#USER_ID").text());
-    console.log($("#USER_EMAIL").text());
-
     $("#RemoveUserCd").val($("#USER_ID").text());
     $("#RemoveUserId").val($("#USER_EMAIL").text());
 
