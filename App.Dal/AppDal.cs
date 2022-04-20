@@ -25,17 +25,18 @@ namespace App.DAL
         /// <returns></returns>
         public List<Users> GetUser(string UserEmail)
         {
+            List<Users> UserList = new List<Users>();
+
             using (var db = new AppDbContext())
             {
                 try
                 {
-                    var list = db.USERS.Where(x => x.USER_EMAIL == UserEmail).ToList();
-                    return list;
+                    return UserList = db.USERS.Where(x => x.USER_EMAIL == UserEmail).ToList();
                 }
                 catch (Exception e)
                 {
                     Debug.WriteLine(e.Message);
-                    return null;
+                    return UserList;
                 }
             }
         }
@@ -163,92 +164,6 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 역할 업데이트
-        /// </summary>
-        /// <param name="RoleId">Identity Role Id</param>
-        /// <param name="RoleNm">Identity Role Name</param>
-        public void UpdateRole(string RoleId, string RoleNm)
-        {
-            using (var db = _identity_context)
-            {
-                try
-                {
-                    var Model = db.Roles.First(x => x.Id.Equals(RoleId));
-
-                    Model.Name = RoleNm;
-                    Model.NormalizedName = RoleNm;
-
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 역할 추가
-        /// </summary>
-        /// <param name="RoleId">Role Id</param>
-        /// <param name="RoleNm"></param>
-        public void InsertRole(string RoleId, string RoleNm)
-        {
-            using (var db = _identity_context)
-            {
-                try
-                {
-                    IdentityRole Roles = new IdentityRole();
-
-                    if (string.IsNullOrEmpty(RoleId))
-                    {
-                        Guid guid = Guid.NewGuid();
-                        Roles.Id = guid.ToString();
-                    }
-                    else
-                    {
-                        Roles.Id = RoleId;
-                    }
-
-                    Roles.Name = RoleNm;
-                    Roles.NormalizedName = RoleNm.ToUpper();
-
-                    db.Roles.Add(Roles);
-                    db.SaveChanges();
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 권한(역할) 제거
-        /// </summary>
-        /// <param name="RoleId"></param>
-        public void DeleteRole(string RoleId)
-        {
-            try
-            {
-                using (var db = _identity_context)
-                {
-                    var Model = db.Roles.First(x => x.Id.Equals(RoleId));
-
-                    if (Model != null)
-                    {
-                        db.Roles.Remove(Model);
-                        db.SaveChanges();
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-        }
-
-        /// <summary>
         /// 사용자 권한 및 정보 조회
         /// </summary>
         /// <returns></returns>
@@ -314,9 +229,10 @@ namespace App.DAL
         /// <returns></returns>
         public List<Users> GetIdentityNullUsers()
         {
+            List<Users> UserList = new List<Users>();
+
             try
             {
-                List<Users> UserList;
                 List<IdentityUser> IdentityUser;
                 List<IdentityUserRole<string>> IdentityUserRoles;
 
@@ -346,7 +262,7 @@ namespace App.DAL
             catch (Exception e)
             {
                 Debug.WriteLine(e.Message);
-                return null;
+                return UserList;
             }
         }
 
@@ -442,31 +358,35 @@ namespace App.DAL
         {
             try
             {
-                IdentityUserRole<string> Model = new IdentityUserRole<string>();
-
-                using (var db = new ApplicationDbContext())
+                // RoleName을 지정하지 않으면 역할 등록을 하지 않음.
+                if (string.IsNullOrEmpty(RoleName))
                 {
-                    var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
-                    var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
+                    IdentityUserRole<string> Model = new IdentityUserRole<string>();
 
-                    var ApprovaledRole = GetUserRoles(UserEmail);
-
-                    // 기존 Role 제거
-                    if (ApprovaledRole.Count > 0)
+                    using (var db = new ApplicationDbContext())
                     {
-                        foreach (var item in ApprovaledRole)
+                        var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
+                        var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
+
+                        var ApprovaledRole = GetUserRoles(UserEmail);
+
+                        // 기존 Role 제거
+                        if (ApprovaledRole.Count > 0)
                         {
-                            RevokeAuthorizationUser(UserEmail, item);
+                            foreach (var item in ApprovaledRole)
+                            {
+                                RevokeAuthorizationUser(UserEmail, item);
+                            }
                         }
-                    }
 
-                    if (listUser != null && listRole != null)
-                    {
-                        Model.UserId = listUser.Id;
-                        Model.RoleId = listRole.Id;
+                        if (listUser != null && listRole != null)
+                        {
+                            Model.UserId = listUser.Id;
+                            Model.RoleId = listRole.Id;
 
-                        db.UserRoles.Add(Model);
-                        db.SaveChanges();
+                            db.UserRoles.Add(Model);
+                            db.SaveChanges();
+                        }
                     }
                 }
             }
@@ -505,7 +425,7 @@ namespace App.DAL
                         }
 
                         // Get RoleName
-                        foreach (var item in RoleIdList)
+                        foreach (string item in RoleIdList)
                         {
                             string RoleName = db.Roles.FirstOrDefault(x => x.Id.Equals(item)).Name.ToString();
                             RoleNameList.Add(RoleName);
@@ -587,29 +507,6 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 권한 리스트 조회
-        /// </summary>
-        /// <returns></returns>
-        public List<IdentityRole> GetRolesList()
-        {
-            List<IdentityRole> roles = new List<IdentityRole>();
-
-            using (var db = _identity_context)
-            {
-                try
-                {
-                    roles = db.Roles.ToList();
-                    return roles;
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                    return roles;
-                }
-            }
-        }
-
-        /// <summary>
         /// 계정 잠금 해제
         /// </summary>
         /// <param name="LockUserId">사용자 ID</param>
@@ -658,6 +555,10 @@ namespace App.DAL
             }
         }
 
+        /// <summary>
+        /// 계정 잠금 리스트
+        /// </summary>
+        /// <returns></returns>
         public List<Users> GetLockList()
         {
             // Identity Lock List
@@ -699,6 +600,119 @@ namespace App.DAL
 
             return LockUserList;
         }
+
+        #endregion
+
+        #region 역할
+        /// <summary>
+        /// 역할(권한) 리스트 조회
+        /// </summary>
+        /// <returns></returns>
+        public List<IdentityRole> GetRolesList()
+        {
+            List<IdentityRole> roles = new List<IdentityRole>();
+
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    roles = db.Roles.ToList();
+                    return roles;
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                    return roles;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 역할 업데이트
+        /// </summary>
+        /// <param name="RoleId">Identity Role Id</param>
+        /// <param name="RoleNm">Identity Role Name</param>
+        public void UpdateRole(string RoleId, string RoleNm)
+        {
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    var Model = db.Roles.First(x => x.Id.Equals(RoleId));
+
+                    Model.Name = RoleNm;
+                    Model.NormalizedName = RoleNm;
+
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 역할 추가
+        /// </summary>
+        /// <param name="RoleId">Role Id</param>
+        /// <param name="RoleNm"></param>
+        public void InsertRole(string RoleId, string RoleNm)
+        {
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    IdentityRole Roles = new IdentityRole();
+
+                    if (string.IsNullOrEmpty(RoleId))
+                    {
+                        Guid guid = Guid.NewGuid();
+                        Roles.Id = guid.ToString();
+                    }
+                    else
+                    {
+                        Roles.Id = RoleId;
+                    }
+
+                    Roles.Name = RoleNm;
+                    Roles.NormalizedName = RoleNm.ToUpper();
+
+                    db.Roles.Add(Roles);
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 권한(역할) 제거
+        /// </summary>
+        /// <param name="RoleId"></param>
+        public void DeleteRole(string RoleId)
+        {
+            try
+            {
+                using (var db = _identity_context)
+                {
+                    var Model = db.Roles.First(x => x.Id.Equals(RoleId));
+
+                    if (Model != null)
+                    {
+                        db.Roles.Remove(Model);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
         #endregion
     }
 }
