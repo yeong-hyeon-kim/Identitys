@@ -31,6 +31,7 @@ namespace App.DAL
             {
                 try
                 {
+                    // 사용자 정보 테이블에서 일치하는 내용 반환. 
                     return UserList = db.USERS.Where(x => x.USER_EMAIL == UserEmail).ToList();
                 }
                 catch (Exception e)
@@ -173,12 +174,13 @@ namespace App.DAL
 
             try
             {
+                // 로컬 사용자
                 List<Users> LocalUser;
+                // Identity 로컬 사용자
                 List<IdentityUser> Users;
 
                 List<Roles> UserRoleToRole;
                 List<Roles> IdentityUserToRole = new List<Roles>();
-                //List<Roles> UserToRole = new List<Roles>();
 
                 using (var db = _context)
                 {
@@ -224,7 +226,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 미등록 사용자 조회
+        /// 미등록(역할을 부여하지 않은) 사용자 조회
         /// </summary>
         /// <returns></returns>
         public List<Users> GetIdentityNullUsers()
@@ -443,7 +445,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 사용자 권한 취소
+        /// 사용자 역할(권한) 취소
         /// </summary>
         /// <param name="UserEmail"></param>
         /// <param name="RoleName"></param>
@@ -475,7 +477,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 특정 사용자에 부여된 역할 리스트
+        /// 특정 사용자에 부여된 역할(권한) 리스트
         /// </summary>
         /// <param name="UserEmail">사용자 이메일</param>
         /// <param name="RoleName">역할 이름</param>
@@ -569,6 +571,7 @@ namespace App.DAL
             {
                 try
                 {
+                    // 잠금 기능을 사용하고 유효기간이 현재 일시보다 미래일 시 잠금 중으로 판단.
                     LockList = db.Users.Where(x => x.LockoutEnabled.Equals(true) && x.LockoutEnd > DateTimeOffset.Now).ToList();
                 }
                 catch (Exception e)
@@ -628,7 +631,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 역할 업데이트
+        /// 역할(권한) 업데이트
         /// </summary>
         /// <param name="RoleId">Identity Role Id</param>
         /// <param name="RoleNm">Identity Role Name</param>
@@ -653,7 +656,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 역할 추가
+        /// 역할(권한) 추가
         /// </summary>
         /// <param name="RoleId">Role Id</param>
         /// <param name="RoleNm"></param>
@@ -689,7 +692,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 권한(역할) 제거
+        /// 역할(권한) 제거
         /// </summary>
         /// <param name="RoleId"></param>
         public void DeleteRole(string RoleId)
