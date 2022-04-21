@@ -327,78 +327,6 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 사용자 제거
-        /// </summary>
-        /// <param name="UserEmail">사용자 이메일</param>
-        public void DeleteIdentityUser(string UserEmail)
-        {
-            using (var db = _identity_context)
-            {
-                try
-                {
-                    var list = db.Users.FirstOrDefault(x => x.UserName == UserEmail);
-
-                    if (list != null)
-                    {
-                        db.Users.Remove(list);
-                        db.SaveChanges();
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 사용자 권한 부여
-        /// </summary>
-        /// <param name="UserEmail">사용자 이메일</param>
-        /// <param name="RoleName">권한(역할)명칭</param>
-        public void GrantAuthorizationUser(string UserEmail, string RoleName)
-        {
-            try
-            {
-                // RoleName을 지정하지 않으면 역할 등록을 하지 않음.
-                if (string.IsNullOrEmpty(RoleName))
-                {
-                    IdentityUserRole<string> Model = new IdentityUserRole<string>();
-
-                    using (var db = new ApplicationDbContext())
-                    {
-                        var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
-                        var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
-
-                        var ApprovaledRole = GetUserRoles(UserEmail);
-
-                        // 기존 Role 제거
-                        if (ApprovaledRole.Count > 0)
-                        {
-                            foreach (var item in ApprovaledRole)
-                            {
-                                RevokeAuthorizationUser(UserEmail, item);
-                            }
-                        }
-
-                        if (listUser != null && listRole != null)
-                        {
-                            Model.UserId = listUser.Id;
-                            Model.RoleId = listRole.Id;
-
-                            db.UserRoles.Add(Model);
-                            db.SaveChanges();
-                        }
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine(e.Message);
-            }
-        }
-
-        /// <summary>
         /// 사용자에게 부여된 권한명 조회
         /// </summary>
         /// <param name="UserEmail">사용자 이메일</param>
@@ -445,6 +373,78 @@ namespace App.DAL
         }
 
         /// <summary>
+        /// 사용자 제거
+        /// </summary>
+        /// <param name="UserEmail">사용자 이메일</param>
+        public void DeleteIdentityUser(string UserEmail)
+        {
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    var list = db.Users.FirstOrDefault(x => x.UserName == UserEmail);
+
+                    if (list != null)
+                    {
+                        db.Users.Remove(list);
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 사용자 권한 부여
+        /// </summary>
+        /// <param name="UserEmail">사용자 이메일</param>
+        /// <param name="RoleName">권한(역할)명칭</param>
+        public void GrantAuthorizationUser(string UserEmail, string RoleName)
+        {
+            try
+            {
+                // RoleName을 지정하지 않으면 역할 등록을 하지 않음.
+                if (!string.IsNullOrEmpty(RoleName))
+                {
+                    IdentityUserRole<string> Model = new IdentityUserRole<string>();
+
+                    using (var db = new ApplicationDbContext())
+                    {
+                        var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
+                        var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
+
+                        var ApprovaledRole = GetUserRoles(UserEmail);
+
+                        // 기존 Role 제거
+                        if (ApprovaledRole.Count > 0)
+                        {
+                            foreach (var item in ApprovaledRole)
+                            {
+                                RevokeAuthorizationUser(UserEmail, item);
+                            }
+                        }
+
+                        if (listUser != null && listRole != null)
+                        {
+                            Model.UserId = listUser.Id;
+                            Model.RoleId = listRole.Id;
+
+                            db.UserRoles.Add(Model);
+                            db.SaveChanges();
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
+        /// <summary>
         /// 사용자 역할(권한) 취소
         /// </summary>
         /// <param name="UserEmail"></param>
@@ -455,7 +455,7 @@ namespace App.DAL
             {
                 IdentityUserRole<string> Model = new IdentityUserRole<string>();
 
-                using (var db = _identity_context)
+                using (var db = new ApplicationDbContext())
                 {
                     var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
                     var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
@@ -489,13 +489,19 @@ namespace App.DAL
 
                 using (var db = _identity_context)
                 {
+                    // 인자로 받은 사용자 이메일을 받아 사용자 검색. 
                     var listUser = db.Users.FirstOrDefault(x => x.UserName.Equals(UserEmail));
+                    // 사용자별 등록된 역할 리스트 조회.
                     var listUserRole = db.UserRoles.Where(x => x.UserId.Equals(listUser.Id)).ToList();
+                    // 특정 역할 정보 조회
                     var listRole = db.Roles.FirstOrDefault(x => x.Name.Equals(RoleName));
 
+                    // 특정 역할과 일치하지 않는 역할 조회
                     listUserRole = listUserRole.Where(x => !x.RoleId.Equals(listRole.Id)).ToList();
 
+                    // 사용자 Id
                     Model.UserId = listUser.Id;
+                    // 역할 Id
                     Model.RoleId = listUserRole.First().RoleId;
 
                     db.UserRoles.Remove(Model);
