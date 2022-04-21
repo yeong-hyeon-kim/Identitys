@@ -209,13 +209,11 @@
     </div>
 </div>
 
-<script src="~/js/admin.js" asp-append-version="true"></script>
-
 <script>
     // 권한 제거 확인 다이얼로그
     let RemoveRoleModal = document.getElementById('RemoveRoleConfirmModal')
     RemoveRoleModal.addEventListener('show.bs.modal', function (event) {
-        let modalTitle = ApproveModal.querySelector('.modal-title')
+        let modalTitle = RemoveRoleModal.querySelector('.modal-title')
         modalTitle.textContent = '알림'
 
         let button = event.relatedTarget;
@@ -233,7 +231,7 @@
     // 권한 수정 다이얼로그
     let UpdateRoleModal = document.getElementById('UpdateRoleModal')
     UpdateRoleModal.addEventListener('show.bs.modal', function (event) {
-        let modalTitle = ApproveModal.querySelector('.modal-title')
+        let modalTitle = UpdateRoleModal.querySelector('.modal-title')
         modalTitle.textContent = '알림'
 
         let button = event.relatedTarget;
