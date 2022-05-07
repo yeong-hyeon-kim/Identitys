@@ -25,10 +25,4 @@
     <ProjectReference Include="..\App.Dal\App.DAL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="App.DAL">
-      <HintPath>..\App.Dal\bin\Debug\net6.0\App.DAL.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
