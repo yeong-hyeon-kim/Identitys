@@ -1,4 +1,7 @@
-﻿function locationAdminPage() {
+﻿const defaultURL = window.location.protocol + "//" + window.location.host + "/";
+const defaultRequesteURL = defaultURL + "Api/";
+
+function locationAdminPage() {
     location.href = defaultURL + "Admin";
 }
 
