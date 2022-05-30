@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 
 namespace ALIMS.Controllers
 {
+    [ApiExplorerSettings(GroupName = "APIS")]
     [Route("[controller]/[action]")]
     [ApiController]
     public class ApiController : ControllerBase

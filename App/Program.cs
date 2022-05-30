@@ -3,6 +3,7 @@ using App.DAL;
 using App.Data;
 using App.IDAL;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 
@@ -47,8 +48,25 @@ builder.Services.AddSwaggerGen(c =>
         {
             Name = "Use under LICX",
             Url = new Uri("https://example.com/license"),
-        }
+        },
+        
     });
+    c.TagActionsBy(api =>
+    {
+        if (api.GroupName != null)
+        {
+            return new[] { api.GroupName };
+        }
+
+        var controllerActionDescriptor = api.ActionDescriptor as ControllerActionDescriptor;
+        if (controllerActionDescriptor != null)
+        {
+            return new[] { controllerActionDescriptor.ControllerName };
+        }
+
+        throw new InvalidOperationException("Unable to determine tag for endpoint.");
+    });
+    c.DocInclusionPredicate((name, api) => true);
 });
 
 var app = builder.Build();
