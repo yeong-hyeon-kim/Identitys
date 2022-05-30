@@ -3,7 +3,7 @@
 
 <hr>
 
-## ASP Net Core Identitys
+## ASP .Net Core Identitys
   * `ASP.NET Core Identity Entity Framework Core`를 활용한 사용자 관리`(User Management)` 예제
   * 기본적으로 제공되는 `Identity Migration`을 활용하여 사용자 관리 기능을 확장합니다.
   * 영문으로 작성된 탬플릿을 한글화 합니다.
@@ -73,13 +73,17 @@
 
 <hr>
 
-### Database Connection(appsettings)
+### ✔ 확인 사항(Check List)
+* SQL Server v2019 이후 버전이 설치되어야 합니다.
+* Installed SQL Server v2019 ~
+
+### 데이터베이스 연결[Database Connection(Ref:appsettings.json)]
 * `User Database`
 > "APP.DB": "Server=`Server IP`, `Port`; Database=APP.DB; User Id=`Login User ID`; Password=`Login User PW`;"
 * `Identity Database`
 > "APP.INDENTITY": "Server=`Server IP`, `Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
 
-### Database Update(Package Manage Console)
+### 데이터베이스 업데이트(구조 동기화) [Database Update(Package Manage Console)]
 * `User Database`
 > "update-database -Context `AppDbContext`"
 * `Identity Database`
