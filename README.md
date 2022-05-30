@@ -72,14 +72,13 @@
 
 ## 개발 환경(Develop Environment)
 
-* OS : `Microsoft Windows 10 Pro`, `x64`
-* Version : `10.0.19044 Bulid 19044`
+### 💌 확인 사항(Check List)
 
-### 🧾 확인 사항(Check List)
-
-* ✔ .NET 6 이상 버전이 설치되어야 합니다.
-* ✔ Visual Studio v2022 ~ 버전이 설치되어야 합니다.
-* ✔ SQL Server v2019 ~ 버전이 설치되어야 합니다.
+* ✔ OS : `Microsoft Windows 10 Pro`, `x64`
+* ✔ Version : `10.0.19044 Bulid 19044`
+* ✔ Framework : .NET 6.X ~ 버전이 설치되어야 합니다.
+* ✔ Database : SQL Server v2019 ~ 버전이 설치되어야 합니다.
+* ✔ IDE : Visual Studio v2022 ~ 버전이 설치되어야 합니다.
 
 ## 프로젝트 빌드(Project Bulid)
 
