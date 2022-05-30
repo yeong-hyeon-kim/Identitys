@@ -5,11 +5,11 @@
     ViewData["ActivePage"] = ManageNavPages.PersonalData;
 }
 
-<h4>개인정보 삭제</h4>
+<h4 class="text-light">개인정보 삭제</h4>
 
-<div class="alert alert-warning" role="alert">
+<div class="alert alert-danger" role="alert">
     <p>
-        <strong>개인정보를 삭제하면 복구 할 수 없습니다.</strong>
+        <strong class="text-dark">개인정보를 삭제하면 복구 할 수 없습니다.</strong>
     </p>
 </div>
 
@@ -19,8 +19,8 @@
         @if (Model.RequirePassword)
         {
             <div class="mb-3">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+                <label asp-for="Input.Password" class="text-light"></label>
+                <input asp-for="Input.Password" class="form-control bg-dark text-light" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
         }

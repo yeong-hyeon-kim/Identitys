@@ -5,19 +5,19 @@
     ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
-<h4>프로필</h4>
+<h4 class="text-light">프로필</h4>
 <partial name="_StatusMessage" model="Model.StatusMessage" />
 <div class="row">
     <div class="col-md-6">
         <form id="profile-form" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
+            <div class="mb-3 text-light">
                 <label asp-for="Username"></label>
-                <input asp-for="Username" class="form-control" disabled />
+                <input asp-for="Username" class="form-control bg-dark text-light" disabled />
             </div>
-            <div class="mb-3">
+            <div class="mb-3 text-light">
                 <label asp-for="Input.PhoneNumber"></label>
-                <input asp-for="Input.PhoneNumber" class="form-control" />
+                <input asp-for="Input.PhoneNumber" class="form-control bg-dark text-light" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">저장</button>

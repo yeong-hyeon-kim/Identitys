@@ -7,27 +7,27 @@
 
 }
 
-<h3>사용자 등록</h3>
+<h3 class="text-light">사용자 등록</h3>
 
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@returnUrl" method="post">
-            <h4>새 사용자를 등록합니다.</h4>
+            <h4 class="text-light">새 사용자를 등록합니다.</h4>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="mb-3">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
+                <label asp-for="Input.Email" class="text-light"></label>
+                <input asp-for="Input.Email" class="form-control bg-dark text-light" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
+                <label asp-for="Input.Password" class="text-light"></label>
+                <input asp-for="Input.Password" class="form-control bg-dark text-light" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="mb-3">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
+                <label asp-for="Input.ConfirmPassword" class="text-light"></label>
+                <input asp-for="Input.ConfirmPassword" class="form-control bg-dark text-light" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">등록</button>
@@ -35,7 +35,7 @@
     </div>
     <div class="col-md-6 col-md-offset-2">
         <section>
-            <h4>사용자 등록은 관리자에게 문의해주세요.</h4>
+            <h4 class="text-light">사용자 등록은 관리자에게 문의해주세요.</h4>
             <hr />
         </section>
     </div>
