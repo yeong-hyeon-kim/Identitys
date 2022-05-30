@@ -72,6 +72,9 @@
 
 ## 개발 환경(Develop Environment)
 
+* OS : `Microsoft Windows 10 Pro`, `x64`
+* Version : `10.0.19044 Bulid 19044`
+
 ### 🧾 확인 사항(Check List)
 
 * ✔ .NET 6 이상 버전이 설치되어야 합니다.
@@ -82,13 +85,18 @@
 
 <hr>
 
-### 1. 데이터베이스 연결[Database Connection(Ref:appsettings.json)]
+### 1. 데이터베이스 연결[Database Connection]
+
+#### Ref:appsettings.json
+
 * `User Database`
 > "APP.DB": "Server=`Server IP`, `Port`; Database=APP.DB; User Id=`Login User ID`; Password=`Login User PW`;"
 * `Identity Database`
 > "APP.INDENTITY": "Server=`Server IP`, `Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
 
-### 2. 데이터베이스 업데이트(구조 동기화) [Database Update(Package Manage Console)]
+### 2. 데이터베이스 업데이트(구조 동기화) [Database Update(Sync Structure)]
+
+#### Package Manage Console
 * `User Database`
 > "update-database -Context `AppDbContext`"
 * `Identity Database`
