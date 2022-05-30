@@ -67,6 +67,7 @@
 ## API 테스트(Test)
 ### Swagger
 * URL : <https://{Domain}:{Port}/swagger/index.html>
+* ![SwaggerAPIs](./Snapshot/SwaggerAPIs.PNG)
 
 ## 프로젝트 빌드(Project Bulid)
 
