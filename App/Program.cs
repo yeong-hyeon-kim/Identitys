@@ -4,6 +4,7 @@ using App.Data;
 using App.IDAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,6 +28,29 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<AppLogic>();
 builder.Services.AddTransient<IAppDal, AppDal>();
 
+
+// Add Service : Swagger 
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Version = "v1",
+        Title = "Identitys App API",
+        Description = "Identitys.App.APIS",
+        Contact = new OpenApiContact
+        {
+            Name = "yeong-hyeon-kim",
+            Email = string.Empty,
+            Url = new Uri("https://github.com/yeong-hyeon-kim")
+        },
+        License = new OpenApiLicense
+        {
+            Name = "Use under LICX",
+            Url = new Uri("https://example.com/license"),
+        }
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,6 +67,17 @@ else
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+
+// Use Swagger
+app.UseSwagger(c =>
+{
+    c.SerializeAsV2 = true;
+});
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "App.APIS");
+    c.RoutePrefix = "swagger";
+});
 
 app.UseRouting();
 

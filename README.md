@@ -63,6 +63,11 @@
 
    ![사용자 잠금 해제](./Snapshot/AccountLock.PNG)
 
+
+## API 테스트(Test)
+### Swagger
+* URL : <https://{Domain}:{Port}/swagger/index.html>
+
 ## 프로젝트 빌드(Project Bulid)
 
 <hr>
