@@ -69,21 +69,26 @@
 * URL : <https://{Domain}:{Port}/swagger/index.html>
 * ![SwaggerAPIs](./Snapshot/SwaggerAPIs.PNG)
 
+
+## 개발 환경(Develop Environment)
+
+### 🧾 확인 사항(Check List)
+
+* ✔ .NET 6 이상 버전이 설치되어야 합니다.
+* ✔ Visual Studio v2022 ~ 버전이 설치되어야 합니다.
+* ✔ SQL Server v2019 ~ 버전이 설치되어야 합니다.
+
 ## 프로젝트 빌드(Project Bulid)
 
 <hr>
 
-### ✔ 확인 사항(Check List)
-* SQL Server v2019 이후 버전이 설치되어야 합니다.
-* Installed SQL Server v2019 ~
-
-### 데이터베이스 연결[Database Connection(Ref:appsettings.json)]
+### 1. 데이터베이스 연결[Database Connection(Ref:appsettings.json)]
 * `User Database`
 > "APP.DB": "Server=`Server IP`, `Port`; Database=APP.DB; User Id=`Login User ID`; Password=`Login User PW`;"
 * `Identity Database`
 > "APP.INDENTITY": "Server=`Server IP`, `Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
 
-### 데이터베이스 업데이트(구조 동기화) [Database Update(Package Manage Console)]
+### 2. 데이터베이스 업데이트(구조 동기화) [Database Update(Package Manage Console)]
 * `User Database`
 > "update-database -Context `AppDbContext`"
 * `Identity Database`
