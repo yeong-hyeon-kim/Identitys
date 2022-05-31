@@ -41,7 +41,7 @@ namespace App.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required(ErrorMessage = "이메일은 반드시 입력해야합니다.")]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage = "이메일 형식이 맞지 않습니다.")]
             [Display(Name = "이메일")]
             public string? Email { get; set; }
 
