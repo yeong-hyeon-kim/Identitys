@@ -17,7 +17,6 @@ function locationAPIsPage() {
     location.href = defaultURL + "swagger/";
 }
 
-
 function locationUnAuthorizationPage() {
     location.href = defaultURL + "Admin/UnAuthorizationList";
 }

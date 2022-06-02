@@ -49,7 +49,7 @@ builder.Services.AddSwaggerGen(c =>
             Name = "Use under LICX",
             Url = new Uri("https://example.com/license"),
         },
-        
+
     });
     c.TagActionsBy(api =>
     {
