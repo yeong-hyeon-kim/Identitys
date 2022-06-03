@@ -47,10 +47,9 @@ const APIList = [{
     ],
     "DELETE": [
         { "Remove User": "RemoveUser?" },
-        { "Delete Role": "DeleteRole?" }    ]
-    }
+        { "Delete Role": "DeleteRole?" }]
+}
 ]
-
 
 // Index View.
 let RequestUpdateUserInfomation = () => {
@@ -64,7 +63,7 @@ let RequestUpdateUserInfomation = () => {
     RequestApiURL += defaultRequesteURL + APIList["PUT"]["Update User Infomation"] + APIArgument
 
     console.log(RequestApiURL)
-    requestAJAX(RequestApiURL,"PUT");
+    requestAJAX(RequestApiURL, "PUT");
 }
 
 let RequestDeleteUser = () => {
@@ -103,8 +102,7 @@ let RequestDeleteRole = () => {
     requestAJAX(RequestApiURL, "DELETE");
 }
 
-
-function requestAJAX(URL,Method) {
+function requestAJAX(URL, Method) {
     $.ajax({
         url: URL,
         method: Method,
