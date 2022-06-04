@@ -37,6 +37,58 @@ function locationLockListPage() {
     location.href = defaultURL + "Admin/LockList";
 }
 
+// Theme
+
+var ThemeMode = "";
+var ThemeClassValue = "text-center bg-black";
+
+let ChangeTheme = (e) => {
+    if (e) {
+        ThemeMode = "Dark";
+        ThemeClassValue = "text-center bg-black";
+
+        //_Layout
+        $('#ThemeName').text("Dark");
+        $("#BooyLayout").attr("style", "background: black;")
+        $("#_layout_navbar").attr("class", "navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 navbar-dark bg-dark")
+
+        $("#Link-Home").attr("class", "nav-link text-white");
+        $("#Link-Admin").attr("class", "nav-link text-white");
+        $("#Link-API").attr("class", "nav-link text-white");
+
+        //_LoginPartial.cshtml
+        $("#Link-Identity").attr("class", "nav-link text-white");
+        $("#Link-Register").attr("class", "nav-link text-white");
+        $("#Link-Login").attr("class", "nav-link text-white");
+
+        //Index.cshtml
+        $("#MainArticle").attr("class", "display-4 text-light")
+        $("#SubArticle").attr("class", "text-light")
+    } else {
+        ThemeMode = "Light";
+        ThemeClassValue = "text-center bg-light";
+
+        //_Layout
+        $('#ThemeName').text("Light");
+        $("#BooyLayout").attr("style", "background: white;")
+        $("#_layout_navbar").attr("class", "navbar navbar-expand-sm navbar-toggleable-sm border-bottom box-shadow mb-3 navbar bg-light")
+
+        $("#Link-Home").attr("class", "nav-link text-black");
+        $("#Link-Admin").attr("class", "nav-link text-black");
+        $("#Link-API").attr("class", "nav-link text-black");
+
+        //_LoginPartial.cshtml
+        $("#Link-Identity").attr("class", "nav-link text-black");
+        $("#Link-Register").attr("class", "nav-link text-black");
+        $("#Link-Login").attr("class", "nav-link text-black");
+
+        //Index.cshtml
+        $("#MainArticle").attr("class", "display-4 text-dark")
+        $("#SubArticle").attr("class", "text-dark")
+    }
+}
+
+
 // Request APIs
 const APIList = [{
     "GET": [{ "": "" }],
