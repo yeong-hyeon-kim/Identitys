@@ -54,8 +54,7 @@
 ## 💻 개발 환경(Develop Environment)
 
 * ✔ `OS` : `Microsoft Windows` 
-  * 🕒 Version : ` 10 Pro 21H2`
-  * 🕒 Version : ` 11 Pro 21H2`
+  * 🕒 Version : ` 10 Pro `, `11 Pro 21H2`
 * ✔ `Framework` : `.NET Core`, `Entity Framework Core`
   * 🕒 Version : `.NET 6`
 * ✔ `Database` : `SQL Server`
