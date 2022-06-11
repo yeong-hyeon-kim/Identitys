@@ -53,10 +53,11 @@
 
 ## 💻 개발 환경(Develop Environment)
 
-* ✔ `OS` : `Microsoft Windows` 
+* ✔ `OS` : ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=Windows&logoColor=white)
   * 🕒 Version : ` 10 Pro `, `11 Pro 21H2`
 * ✔ `Framework` : `.NET Core`, `Entity Framework Core`
   * 🕒 Version : `.NET 6`
+* ✔ `Language` : ![C#](https://img.shields.io/badge/CSharp-239120?style=flat-square&logo=CSharp&logoColor=white)
 * ✔ `Database` : `SQL Server`
   * 🕒 Version : `2019`
 * ✔ `IDE` : `Visual Studio`
