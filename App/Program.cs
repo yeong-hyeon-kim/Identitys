@@ -10,9 +10,11 @@ using Microsoft.OpenApi.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Appsettings.json GetConnectionString("[Key]");
 var connectionApp = builder.Configuration.GetConnectionString("APP.DB");
 var connectionAppIdentity = builder.Configuration.GetConnectionString("APP.IDENTITY");
 
+// Context Class.
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(connectionApp));
 
@@ -102,6 +104,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Default Page.
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
