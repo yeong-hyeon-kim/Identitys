@@ -71,6 +71,11 @@ builder.Services.AddSwaggerGen(c =>
     c.DocInclusionPredicate((name, api) => true);
 });
 
+
+builder.Services.AddSession(options => {
+    options.IdleTimeout = TimeSpan.FromHours(1);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -103,6 +108,9 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCookiePolicy();
+app.UseSession();
 
 // Default Page.
 app.MapControllerRoute(
