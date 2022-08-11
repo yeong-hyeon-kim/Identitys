@@ -72,7 +72,8 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 
-builder.Services.AddSession(options => {
+builder.Services.AddSession(options =>
+{
     options.IdleTimeout = TimeSpan.FromHours(1);
 });
 
