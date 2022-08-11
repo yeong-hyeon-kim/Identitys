@@ -14,6 +14,8 @@ namespace App.Controllers
 
         public IActionResult Index()
         {
+            ViewData["Theme"] = HttpContext.Session.GetString("Theme");
+
             return View(_AppBll.GetIdentityUsers());
         }
 

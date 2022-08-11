@@ -7,6 +7,7 @@ namespace App.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        const string SessionThemeMode = "Theme";
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -15,6 +16,8 @@ namespace App.Controllers
 
         public IActionResult Index()
         {
+            HttpContext.Session.SetString(SessionThemeMode, "Dark");
+
             return View();
         }
 
