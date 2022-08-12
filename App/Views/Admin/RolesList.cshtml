@@ -6,12 +6,11 @@
 @using Microsoft.AspNetCore.Identity
 @model List<IdentityRole>;
 
-<div class="bg-light border rounded-3" style="margin:15px;">
-    <div class="list-group list-group-flush border-bottom scrollarea" style="margin:15px;">
-        <div style="margin-top:20px;margin-bottom:20px;">
+<div class="DataViewBody bg-light border rounded-3">
+    <div class="DataViewContent list-group list-group-flush border-bottom scrollarea">
+        <div class="DataViewHeader">
             <h3>권한 조회</h3>
             <hr />
-
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#RegisterRoleModal">권한 등록</button>
                 <button type="button" class="btn btn-outline-primary btn-sm" onclick="locationAdminPage()">사용자 관리</button>
@@ -37,8 +36,8 @@
                         if (Model.Count < 1)
                         {
                             <tr>
-                                <td colspan="8" class='text-center' style='padding:12px;'>
-                                    <h5>조회된 데이터가 없습니다!</h5>
+                                <td colspan="8" class='text-center DataViewNull'>
+                                    <h5>조회된 데이터가 없습니다.⚠</h5>
                                 </td>
                             </tr>
                         }
@@ -161,7 +160,7 @@
                         <input type="text" class="form-control" id="RegisterRoleName" name="RoleName" rows="3" required>
                     </div>
                 </form>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

@@ -6,12 +6,11 @@
 @using App.Model;
 @model List<Roles>;
 
-<div class="bg-light border rounded-3" style="margin:15px;">
-    <div class="list-group list-group-flush border-bottom scrollarea" style="margin:15px;">
-        <div style="margin-top:20px;margin-bottom:20px;">
+<div class="DataViewBody bg-light border rounded-3">
+    <div class="DataViewContent list-group list-group-flush border-bottom scrollarea">
+        <div class="DataViewHeader">
             <h3>사용자 관리</h3>
             <hr />
-
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <button type="button" class="btn btn-warning btn-sm" onclick="locationAccountRegisterPage()">사용자 등록</button>
                 <button type="button" class="btn btn-success btn-sm" onclick="locationRolesListPage()">권한 조회</button>
@@ -22,26 +21,27 @@
         </div>
 
         <div class="table-responsive bg-white">
-            <table class="table table-hover">
+            <table class="table table-hover table-bordered">
                 <thead class="table-primary">
                     <tr>
-                        <th scope="col" style="width: 100px;">ID</th>
-                        <th scope="col" style="width: 100px;">코드</th>
-                        <th scope="col" style="width: 100px;">이메일</th>
-                        <th scope="col" style="width: 100px;">이름</th>
-                        <th scope="col" style="width: 100px;">부서</th>
-                        <th scope="col" style="width: 100px;">연락처</th>
-                        <th scope="col" style="width: 100px;">권한</th>
-                        <th scope="col" style="width: 10%;"></th>
+                        <th scope="col">ID</th>
+                        <th scope="col">코드</th>
+                        <th scope="col">이메일</th>
+                        <th scope="col">이름</th>
+                        <th scope="col">부서</th>
+                        <th scope="col">연락처</th>
+                        <th scope="col">권한</th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
-                <tbody style="overflow: auto;">
+
+                <tbody>
                     @{
                         if (Model.Count < 1)
                         {
                             <tr>
-                                <td colspan="8" class='text-center' style='padding:10px;'>
-                                    <h5>조회된 데이터가 없습니다!</h5>
+                                <td colspan="8" class='text-center DataViewNull'>
+                                    <h5>조회된 데이터가 없습니다.⚠</h5>
                                 </td>
                             </tr>
                         }
@@ -167,7 +167,7 @@
 </div>
 
 <script>
-    (function () {
+    (function() {
         requestAuthorizationList();
     }());
 
@@ -193,7 +193,7 @@
 
     // 사용자 정보 변경 다이얼로그
     var UpdateUserInfoModal = document.getElementById('UpdateUserInfoModal')
-    UpdateUserInfoModal.addEventListener('show.bs.modal', function (event) {
+    UpdateUserInfoModal.addEventListener('show.bs.modal', function(event) {
         var modalTitle = UpdateUserInfoModal.querySelector('.modal-title')
         modalTitle.textContent = '사용자 정보'
 
@@ -209,7 +209,7 @@
 
     // 사용자 제거 확인 다이얼로그
     let RemoveUserModal = document.getElementById('RemoveConfirmModal')
-    RemoveUserModal.addEventListener('show.bs.modal', function (event) {
+    RemoveUserModal.addEventListener('show.bs.modal', function(event) {
         let modalTitle = RemoveUserModal.querySelector('.modal-title')
         modalTitle.textContent = '알림'
 

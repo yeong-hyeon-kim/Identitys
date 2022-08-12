@@ -1,0 +1,33 @@
+﻿.DataViewBody {
+    margin: 15px;
+    height: 85vh;
+    width: auto;
+    align-content:center;
+}
+
+.DataViewContent {
+    margin: 15px;
+    height: 80vh;
+    overflow: auto;
+}
+
+.DataViewHeader {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.DataViewNull {
+    vertical-align: middle;
+}
+
+th {
+    width: auto;
+    position: sticky;
+    top: 0px;
+    line-height: normal;
+    vertical-align: middle;
+}
+
+td {
+    vertical-align: middle;
+}
