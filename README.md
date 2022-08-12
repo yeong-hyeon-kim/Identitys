@@ -1,7 +1,7 @@
 
-## 📕 프로젝트 개요(Introduce Project)
+# 📕 프로젝트 개요(Introduce Project)
 
-### ASP .Net Core Identitys
+## ASP .Net Core Identitys
 
 * `ASP.NET Core Identity Entity Framework Core`를 활용한 사용자 관리`(User Management)` 템플릿 입니다.
 * 기본적으로 제공되는 `Identity Migration`을 활용하여 사용자 관리 기능을 확장합니다.
@@ -36,6 +36,7 @@
 3. 특정 역할(권한)을 삭제합니다.
 
 ![역할(권한) 조회](./Snapshot/Roles.PNG)
+
 #### 사용자 관리
 
 1. 사용자별 역할(권한) 목록을 표시합니다.
@@ -64,17 +65,12 @@
 
 ## 💻 개발 환경(Develop Environment)
 
-* ✔ `OS` : ![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=Windows&logoColor=white)
-  * 🕒 Version : ` 10 Pro `, `11 Pro 21H2`
-* ✔ `Framework` : `.NET Core`, `Entity Framework Core`
-  * 🕒 Version : `.NET 6`
-* ✔ `Language` : ![C#](https://img.shields.io/badge/CSharp-239120?style=flat-square&logo=CSharp&logoColor=white)
-* ✔ `Database` : `SQL Server`
-  * 🕒 Version : `2019`
-* ✔ `IDE` : `Visual Studio`
-  * 🕒 Version : `2022`
+||운영체제(OS)|언어(Language)|프레임워크(Framework)|종속성(Dependency)|
+|-|:-:|:-:|:-:|:-:|
+|명칭(Name)|![Windows](https://img.shields.io/badge/Windows-0078D6?style=flat-square&logo=Windows&logoColor=white)|![C#](https://img.shields.io/badge/CSharp-239120?style=flat-square&logo=CSharp&logoColor=white)|![.NET](https://img.shields.io/badge/.NET-512BD4?style=flat-square&logo=.NET&logoColor=white)|![NuGet](https://img.shields.io/badge/NUGET-004880?style=flat-square&logo=NuGet&logoColor=white)|
+|버전(Version)|`10, 11 Pro`|`10.0`|`6.0`|`6.2.1.2`|
 
-<hr>
+---
 
 ### 🧪 테스트(Test)
 
