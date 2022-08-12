@@ -90,18 +90,18 @@ let ChangeTheme = (e) => {
 
 
 // Request APIs
-const APIList = [{
-    "GET": [{ "": "" }],
-    "POST": [{ "": "" }],
+const APIList = {
+    "GET": { "": "" },
+    "POST": { "Insert Role": "InsertRole?" },
     "PUT": [
         { "Update User Infomation": "UpdateUserInfomation?" },
         { "Update User Infomation": "UpdateRole?" },
     ],
     "DELETE": [
         { "Remove User": "RemoveUser?" },
-        { "Delete Role": "DeleteRole?" }]
+        { "Delete Role": "DeleteRole?" }
+    ]
 }
-]
 
 // Index View.
 let RequestUpdateUserInfomation = () => {
@@ -152,6 +152,17 @@ let RequestDeleteRole = () => {
 
     console.log(RequestApiURL)
     requestAJAX(RequestApiURL, "DELETE");
+}
+
+let RequestInsertRole = () => {
+    let RequestApiURL = "";
+    let APIArgument = "RoleId=" + $('#RegisterRoleId').val();
+    APIArgument += "&RoleName=" + $('#RegisterRoleName').val();
+
+    RequestApiURL += defaultRequesteURL + APIList["POST"]["Insert Role"] + APIArgument
+
+    console.log(RequestApiURL)
+    requestAJAX(RequestApiURL, "POST");
 }
 
 function requestAJAX(URL, Method) {

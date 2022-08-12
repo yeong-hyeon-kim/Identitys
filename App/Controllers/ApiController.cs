@@ -109,6 +109,20 @@ namespace ALIMS.Controllers
             return Redirect("~/Admin/Index");
         }
 
+        /// <summary>
+        /// 역할(권한) 등록
+        /// </summary>
+        /// <param name="RoleId"></param>
+        /// <param name="RoleName"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public IActionResult InsertRole(string RoleId, string RoleName)
+        {
+            _AppBll.InsertRole(RoleId, RoleName);
+
+            return Redirect("~/Admin/RolesList");
+        }
+
         #endregion
     }
 }
