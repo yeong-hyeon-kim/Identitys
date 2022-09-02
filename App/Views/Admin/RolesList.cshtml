@@ -92,7 +92,7 @@
 
                     <div class="mb-3">
                         <label for="lblUserDept" class="form-label">이메일</label>
-                        <input type="text" class="form-control" id="UserEmails" name="UserEmails" required>
+                        <input type="text" class="form-control" placeholder="이메일을 입력해주세요." id="UserEmails" name="UserEmails" required>
                         <div class="invalid-feedback">
                             이메일을 입력해주세요.
                         </div>
@@ -100,7 +100,7 @@
 
                     <div class="mb-3">
                         <label for="lblUserDept" class="form-label">부서</label>
-                        <input type="text" class="form-control" id="UserDept" name="UserDept" required>
+                        <input type="text" class="form-control" placeholder="부서를 입력해주세요." id="UserDept" name="UserDept" required>
                         <div class="invalid-feedback">
                             부서를 입력해주세요.
                         </div>
@@ -108,7 +108,7 @@
 
                     <div class="mb-3">
                         <label for="lblUserContact" class="form-label">연락처</label>
-                        <input type="text" class="form-control" id="UserContact" name="UserContact" required>
+                        <input type="text" class="form-control" placeholder="연락처를 입력해주세요." id="UserContact" name="UserContact" required>
                         <div class="invalid-feedback">
                             연락처를 입력해주세요.
                         </div>
@@ -116,7 +116,7 @@
 
                     <div class="mb-3">
                         <label for="lblAuthorization" class="form-label">권한</label>
-                        <input id="UserAuthorization" class="form-control" name="UserAuthorization" required>
+                        <input id="UserAuthorization" class="form-control" placeholder="권한을 입력해주세요." name="UserAuthorization" required>
                         <div class="invalid-feedback">
                             권한을 입력해주세요.
                         </div>
@@ -139,17 +139,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                @*                <form asp-controller="Admin" asp-action="InsertRole" id="FormRegister">
-                <div class="mb-3">
-                <label for="RoleId" class="form-label">Role ID</label>
-                <input type="text" class="form-control" id="RegisterRoleId" name="RoleId" rows="3">
-                </div>
-                <div class="mb-3">
-                <label for="RoleName" class="form-label">Role Name</label>
-                <input type="text" class="form-control" id="RegisterRoleName" name="RoleName" rows="3" required>
-                </div>
-                </form>*@
-
                 <form id="FormRegister">
                     <div class="mb-3">
                         <label for="RoleId" class="form-label">Role ID</label>
