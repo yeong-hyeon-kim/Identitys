@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using System.Text.Encodings.Web;
 
 namespace App.Areas.Identity.Pages.Account
 {
@@ -53,7 +54,35 @@ namespace App.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                string HtmlString = System.IO.File.ReadAllText(Path.Combine(callbackUrl, "/Account/ForgotPassword.html"));
+                string HtmlString =
+                    $"<!DOCTYPE html>" +
+                    $"<html>" +
+                    $"<head>" +
+                    $"    <meta charset='utf-8'>" +
+                    $"    <meta http-equiv='X-UA-Compatible' content='IE=edge'>" +
+                    $"    <title>Set Password</title>" +
+                    $"    <meta name='viewport' content='width=device-width, initial-scale=1'>" +
+                    $"    <link rel='stylesheet' type='text/css' media='screen' href='{callbackUrl.Split("/")[0]}//{callbackUrl.Split("/")[1]}/{callbackUrl.Split("/")[2]}/wwwroot/css/Email.css'>" +
+                    $"</head>" +
+                    $"<body>" +
+                    $"    <header>" +
+                    $"        <h2 id='H-Title'>💌 ASP NET Core Email Service</h2>" +
+                    $"    </header>" +
+                    $"    <section>" +
+                    $"        <h2>비밀번호 변경(Set Password)</h2>" +
+                    $"        <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' class='btn btn-primary'>이곳을 선택해주세요(Here Click)!</a>" +
+                    $"        <div id='Not-Reply'>" +
+                    $"            <p>이 메일은 발신 전용이므로 회신하실 수 없습니다.🙏</p>" +
+                    $"            <p>You cannot reply to this e-mail because it is for outgoing use only.</p>" +
+                    $"        </div>" +
+                    $"    </section>" +
+                    $"    <hr>" +
+                    $"    <footer>" +
+                    $"        <p>© ASP Net Core Identitys</p>" +
+                    $"    </footer>" +
+                    $"</body>" +
+                    $"</html>";
+
                 await _emailSender.SendEmailAsync(
                     Input.Email, "Forgot Password", HtmlString);
 
