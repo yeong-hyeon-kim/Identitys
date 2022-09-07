@@ -56,7 +56,7 @@ namespace App.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "[ALIMS] 비밀번호 재설정",
+                    "[ASP Net Core] 비밀번호 재설정",
                     $"<!DOCTYPE html>" +
                     $"<head>" +
                     $"    <meta charset='utf-8' />" +
@@ -68,7 +68,7 @@ namespace App.Areas.Identity.Pages.Account
                     $"        <div class='card text-center'>" +
                     $"            <div class='card-body'>" +
                     $"              <h3 class='card-title'>" +
-                    $"                <b>ALIMS</b>" +
+                    $"                <b>ASP Net Core</b>" +
                     $"              </h3>" +
                     $"              <p class='card-text'>" +
                     $"                  비밀번호를 재설정 하시려면<br>아래 버튼을 눌러주세요." +
