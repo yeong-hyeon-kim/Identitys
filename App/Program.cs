@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using System.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 

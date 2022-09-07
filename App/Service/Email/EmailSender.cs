@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using NuGet.Protocol.Plugins;
 
 namespace App.Services.Email
 {
