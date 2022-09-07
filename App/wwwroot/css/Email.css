@@ -1,0 +1,36 @@
+body {
+    margin: 2.5%;
+}
+
+header {
+    border-radius: 5px;
+    padding: 2.5px;
+    background: #0C2C65;
+    color: #fff;
+}
+
+section {
+    border-radius: 5px;
+    border-width: 1px;
+    border-style: solid;
+    height: 70vh;
+    margin-top: 10px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+footer {
+    position: fixed;
+}
+
+p{
+    margin: 0px;
+}
+
+#H-Title {
+    padding-left: 15px;
+}
+
+#Not-Reply{
+    margin-top: 20px;
+}
