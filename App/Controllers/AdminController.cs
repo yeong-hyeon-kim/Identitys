@@ -19,12 +19,12 @@ namespace App.Controllers
             return View(_AppBll.GetIdentityUsers());
         }
 
-        public IActionResult UnAuthorizationList()
+        public IActionResult AuthorizationList()
         {
             return View(_AppBll.GetIdentityNullRoleUsers());
         }
 
-        public IActionResult UnRegisteredList()
+        public IActionResult RegisteredList()
         {
             return View(_AppBll.GetIdentityNullUsers());
         }

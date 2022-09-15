@@ -17,12 +17,12 @@ function locationAPIsPage() {
     location.href = defaultURL + "swagger/";
 }
 
-function locationUnAuthorizationPage() {
-    location.href = defaultURL + "Admin/UnAuthorizationList";
+function locationAuthorizationPage() {
+    location.href = defaultURL + "Admin/AuthorizationList";
 }
 
-function locationUnRegisteredListPage() {
-    location.href = defaultURL + "Admin/UnRegisteredList";
+function locationRegisteredListPage() {
+    location.href = defaultURL + "Admin/RegisteredList";
 }
 
 function locationAccountRegisterPage() {
