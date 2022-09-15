@@ -30,6 +30,7 @@ namespace App.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
+            [Required(ErrorMessage = "연락처는 반드시 입력해야합니다.")]
             [Display(Name = "연락처")]
             public string PhoneNumber { get; set; }
         }

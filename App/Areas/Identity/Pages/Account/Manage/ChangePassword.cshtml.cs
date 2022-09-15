@@ -39,6 +39,7 @@ namespace App.Areas.Identity.Pages.Account.Manage
             [Display(Name = "새 비밀번호")]
             public string NewPassword { get; set; }
 
+            [Required(ErrorMessage = "비밀번호 확인란은 반드시 입력해야합니다.")]
             [DataType(DataType.Password)]
             [Display(Name = "비밀번호 확인")]
             [Compare("NewPassword", ErrorMessage = "입력한 비밀번호와 일치하지 않습니다.")]

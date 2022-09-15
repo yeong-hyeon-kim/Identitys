@@ -40,7 +40,7 @@ namespace App.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "변경할 이메일은 반드시 입력해야합니다.")]
             [EmailAddress]
             [Display(Name = "새 이메일")]
             public string NewEmail { get; set; }
