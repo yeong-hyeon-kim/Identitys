@@ -5,7 +5,7 @@
 
 * `ASP.NET Core Identity Entity Framework Core`를 활용한 사용자 관리`(User Management)` 템플릿 입니다.
 * 기본적으로 제공되는 `Identity Migration`을 활용하여 사용자 관리 기능을 확장합니다.
-* 영문으로 작성된 `Identity` 탬플릿을 한글화 합니다.
+* 영문으로 작성된 `Identity` 양식을 한글화 합니다.
 
 ![홈](./Snapshot/Home.PNG)
 
