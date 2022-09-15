@@ -12,8 +12,10 @@
             <h3>권한 조회</h3>
             <hr />
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#RegisterRoleModal">권한 등록</button>
-                <button type="button" class="btn btn-outline-primary btn-sm" onclick="locationAdminPage()">사용자 관리</button>
+                <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal"
+                    data-bs-target="#RegisterRoleModal">권한 등록</button>
+                <button type="button" class="btn btn-outline-primary btn-sm" onclick="locationAdminPage()">사용자
+                    관리</button>
             </div>
         </div>
 
@@ -55,15 +57,23 @@
                                     <td id="ROLE_NM_@item.Id"></td>
 
                                     <td class="text-center">
-                                        <button type='button' class='btn btn-outline-primary' data-bs-toggle="modal" data-bs-target="#UpdateRoleModal" data-bs-whatever="@item.Id">
-                                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>
-                                                <path d='m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z' />;
+                                        <button type='button' class='btn btn-outline-primary' data-bs-toggle="modal"
+                                    data-bs-target="#UpdateRoleModal" data-bs-whatever="@item.Id">
+                                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
+                                        class='bi bi-plus-square' viewBox='0 0 16 16'>
+                                                <path
+                                            d='m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z' />
+                                                ;
                                             </svg>
                                         </button>
 
-                                        <button type='button' class='btn btn-outline-danger' data-bs-toggle="modal" data-bs-target="#RemoveRoleConfirmModal" data-bs-whatever="@item.Id">
-                                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>
-                                                <path d='M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z' />;
+                                        <button type='button' class='btn btn-outline-danger' data-bs-toggle="modal"
+                                    data-bs-target="#RemoveRoleConfirmModal" data-bs-whatever="@item.Id">
+                                            <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor'
+                                        class='bi bi-plus-square' viewBox='0 0 16 16'>
+                                                <path
+                                            d='M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z' />
+                                                ;
                                             </svg>
                                         </button>
                                     </td>
@@ -92,7 +102,8 @@
 
                     <div class="mb-3">
                         <label for="lblUserDept" class="form-label">이메일</label>
-                        <input type="text" class="form-control" placeholder="이메일을 입력해주세요." id="UserEmails" name="UserEmails" required>
+                        <input type="text" class="form-control" placeholder="이메일을 입력해주세요." id="UserEmails"
+                            name="UserEmails" required>
                         <div class="invalid-feedback">
                             이메일을 입력해주세요.
                         </div>
@@ -100,7 +111,8 @@
 
                     <div class="mb-3">
                         <label for="lblUserDept" class="form-label">부서</label>
-                        <input type="text" class="form-control" placeholder="부서를 입력해주세요." id="UserDept" name="UserDept" required>
+                        <input type="text" class="form-control" placeholder="부서를 입력해주세요." id="UserDept" name="UserDept"
+                            required>
                         <div class="invalid-feedback">
                             부서를 입력해주세요.
                         </div>
@@ -108,7 +120,8 @@
 
                     <div class="mb-3">
                         <label for="lblUserContact" class="form-label">연락처</label>
-                        <input type="text" class="form-control" placeholder="연락처를 입력해주세요." id="UserContact" name="UserContact" required>
+                        <input type="text" class="form-control" placeholder="연락처를 입력해주세요." id="UserContact"
+                            name="UserContact" required>
                         <div class="invalid-feedback">
                             연락처를 입력해주세요.
                         </div>
@@ -116,7 +129,8 @@
 
                     <div class="mb-3">
                         <label for="lblAuthorization" class="form-label">권한</label>
-                        <input id="UserAuthorization" class="form-control" placeholder="권한을 입력해주세요." name="UserAuthorization" required>
+                        <input id="UserAuthorization" class="form-control" placeholder="권한을 입력해주세요."
+                            name="UserAuthorization" required>
                         <div class="invalid-feedback">
                             권한을 입력해주세요.
                         </div>
@@ -125,7 +139,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormUpdateUserInfo" onclick="">등록</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormUpdateUserInfo"
+                    onclick="">등록</button>
             </div>
         </div>
     </div>
@@ -153,7 +168,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" onclick="RequestInsertRole()">등록</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    onclick="RequestInsertRole()">등록</button>
             </div>
         </div>
     </div>
@@ -180,13 +196,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
-                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormUpdateRole" onclick="RequestUpdateRole()">등록</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormUpdateRole"
+                    onclick="RequestUpdateRole()">등록</button>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="RemoveRoleConfirmModal" tabindex="-1" aria-labelledby="RemoveRoleConfirmModal" aria-hidden="true">
+<div class="modal fade" id="RemoveRoleConfirmModal" tabindex="-1" aria-labelledby="RemoveRoleConfirmModal"
+    aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -197,7 +215,8 @@
                 <form asp-controller="Admin" asp-action="DeleteRole" id="FormDeleteRole">
                     <div class="mb-3">
                         <label for="RoleId" class="form-label">Role ID</label>
-                        <input type="text" class="form-control" id="RemoveRoleId" name="RoleId" rows="3" required readonly>
+                        <input type="text" class="form-control" id="RemoveRoleId" name="RoleId" rows="3" required
+                            readonly>
                     </div>
                 </form>
             </div>
