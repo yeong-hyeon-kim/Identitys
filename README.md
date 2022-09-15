@@ -1,7 +1,5 @@
 
-# 📕 프로젝트 개요(Introduce Project)
-
-## ASP .Net Core Identitys
+# 📕 ASP .Net Core Identitys
 
 * `ASP.NET Core Identity Entity Framework Core`를 활용한 사용자 관리`(User Management)` 템플릿 입니다.
 * 기본적으로 제공되는 `Identity Migration`을 활용하여 사용자 관리 기능을 확장합니다.
@@ -127,7 +125,7 @@
 
 ### AspNetRoles
 
-|필드(Field)|내용(Content)|예시|
+|필드(Field)|내용(Content)|예시(Example)|
 |-|-|-|
 |Id|AspNetRoles 테이블의 기본키|
 |Name|역할(권한)명|개발팀, 인사팀, 영업팀|
@@ -142,7 +140,7 @@
 
 ### AspNetUserClaims
 
-|필드(Field)|내용(Content)|예시|
+|필드(Field)|내용(Content)|예시(Example)|
 |-|-|-|
 |Id|RoleClaims 기본키|
 |RoleId| 역할(권한) Id|
