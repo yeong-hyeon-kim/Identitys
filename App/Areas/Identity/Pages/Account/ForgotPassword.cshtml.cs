@@ -62,7 +62,7 @@ namespace App.Areas.Identity.Pages.Account
                     $"    <meta http-equiv='X-UA-Compatible' content='IE=edge'>" +
                     $"    <title>Set Password</title>" +
                     $"    <meta name='viewport' content='width=device-width, initial-scale=1'>" +
-                    $"    <link rel='stylesheet' type='text/css' media='screen' href='{callbackUrl.Split("/")[0]}//{callbackUrl.Split("/")[1]}/{callbackUrl.Split("/")[2]}/wwwroot/css/Email.css'>" +
+                    $"    <link rel='stylesheet' type='text/css' media='screen' href='{callbackUrl.Split("/")[0]}//{callbackUrl.Split("/")[1]}/{callbackUrl.Split("/")[2]}/wwwroot/css/email-form.css'>" +
                     $"</head>" +
                     $"<body>" +
                     $"    <header>" +
