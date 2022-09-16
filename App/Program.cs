@@ -30,6 +30,12 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<AppLogic>();
+// 의존성 주입(DI) : 상위(인터페이스) 타입으로 하위(클래스) 타입을 생성합니다.
+
+/* 생명 주기 */
+// Transient : 요청 받을 때마다 생성합니다.
+// Scoped    : 요청 당 한 번 생성합니다.
+// Singleton : 처음으로 요청 받을 때에 생성. 이후의 요청들은 최초에 생성된 인스턴스를 사용합니다.
 builder.Services.AddTransient<IAppDal, AppDal>();
 
 // Emali Sender Provider Settings
