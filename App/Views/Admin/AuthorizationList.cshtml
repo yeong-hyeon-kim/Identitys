@@ -188,21 +188,14 @@
     </div>
 </div>
 
-<script src="~/js/admin.js" asp-append-version="true"></script>
+<script src="~/js/index.js" asp-append-version="true"></script>
 
 <script>
 
     (function () {
-        requestAuthorizationList();
+        RequestAuthorizationList();
     })();
 
-    // 역할 리스트 요청
-    function requestAuthorizationList() {
-        let RequestURL = defaultRequesteURL + "GetRolesList"
-        $.getJSON(RequestURL, getAuthorizationList);
-    }
-
-    // 역할 리스트 표시
     function getAuthorizationList(data) {
         let html = "";
         $("#AuthorizationName option").empty();

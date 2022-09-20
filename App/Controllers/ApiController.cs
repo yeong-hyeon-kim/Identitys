@@ -43,58 +43,7 @@ namespace ALIMS.Controllers
         }
 
         /// <summary>
-        /// 역할(권한)이 없는 사용자 조회
-        /// </summary>
-        /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role/null")]
-        [HttpGet]
-        public string GetIdentityNullRoleUsers()
-        {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetIdentityNullRoleUsers());
-            return JsonSerialize;
-        }
-
-        /// <summary>
-        /// 미등록 사용자 조회
-        /// </summary>
-        /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/user/null")]
-        [HttpGet]
-        public string GetIdentityNullUsers()
-        {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetIdentityNullUsers());
-            return JsonSerialize;
-        }
-
-        /// <summary>
-        /// 사용자 권한 리스트
-        /// </summary>
-        /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role")]
-        [HttpGet]
-        public string GetRolesList()
-        {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetRolesList());
-            return JsonSerialize;
-        }
-
-        /// <summary>
-        /// 권한 수정
-        /// </summary>
-        /// <param name="RoleId">역할 ID</param>
-        /// <param name="RoleName">역할 명</param>
-        /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role")]
-        [HttpPut]
-        public IActionResult UpdateRole(string RoleId, string RoleName)
-        {
-            _AppBll.UpdateRole(RoleId, RoleName);
-
-            return Redirect("~/Admin/RolesList");
-        }
-
-        /// <summary>
-        /// 사용자 제거
+        /// 사용자(User) 제거
         /// </summary>
         /// <param name="UserId">사용자 ID</param>
         /// <param name="UserCd">사용자 CD</param>
@@ -109,7 +58,7 @@ namespace ALIMS.Controllers
         }
 
         /// <summary>
-        /// 사용자 정보 수정
+        /// 사용자(User) 수정
         /// </summary>
         /// <param name="UserCd"></param>
         /// <param name="UserEmails"></param>
@@ -128,7 +77,48 @@ namespace ALIMS.Controllers
         }
 
         /// <summary>
-        /// 역할(권한) 등록
+        /// 역할(Role)이 없는 사용자(User) 조회
+        /// </summary>
+        /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role/null")]
+        [HttpGet]
+        public string GetIdentityNullRoleUsers()
+        {
+            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetIdentityNullRoleUsers());
+            return JsonSerialize;
+        }
+
+        /// <summary>
+        /// 미등록 사용자(User) 조회
+        /// </summary>
+        /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/user/null")]
+        [HttpGet]
+        public string GetIdentityNullUsers()
+        {
+            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetIdentityNullUsers());
+            return JsonSerialize;
+        }
+
+        #endregion
+
+
+        #region 역할(Role)
+
+        /// <summary>
+        /// 역할(Role) 조회
+        /// </summary>
+        /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role")]
+        [HttpGet]
+        public string GetRolesList()
+        {
+            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetRolesList());
+            return JsonSerialize;
+        }
+
+        /// <summary>
+        /// 역할(Role) 등록
         /// </summary>
         /// <param name="RoleId"></param>
         /// <param name="RoleName"></param>
@@ -142,6 +132,34 @@ namespace ALIMS.Controllers
             return Redirect("~/Admin/RolesList");
         }
 
+        /// <summary>
+        /// 역할(Role) 수정
+        /// </summary>
+        /// <param name="RoleId">역할 ID</param>
+        /// <param name="RoleName">역할 명</param>
+        /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role")]
+        [HttpPut]
+        public IActionResult UpdateRole(string RoleId, string RoleName)
+        {
+            _AppBll.UpdateRole(RoleId, RoleName);
+
+            return Redirect("~/Admin/RolesList");
+        }
+
+        /// <summary>
+        /// 역할(Role) 제거
+        /// </summary>
+        /// <param name="RoleId"></param>
+        /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role")]
+        [HttpDelete]
+        public IActionResult DeleteRole(string RoleId)
+        {
+            _AppBll.DeleteRole(RoleId);
+
+            return Ok();
+        }
         #endregion
     }
 }
