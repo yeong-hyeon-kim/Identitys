@@ -88,15 +88,15 @@
 
 * Method
   * GET
-    * 사용자 조회 : [/Api/GetUserInfo]("")
-    * 권한 목록 조회 : [/Api/GetRolesList]("")
-    * 권한이 없는 사용자 조회 : [/Api/GetIdentityNullRoleUsers]("")
+    * 사용자 조회 : [/v1/identity/user]("")
+    * 권한 목록 조회 : [/v1/identity/role]("")
+    * 권한이 없는 사용자 조회 : [/v1/identity/role/null]("")
   * POST
-    * 권한 등록 : [/Api/InsertRole]("")
+    * 권한 등록 : [/v1/identity/role]("")
   * PUT
-    * 권한 수정 : [/Api/UpdateUserRole]("")
+    * 권한 수정 : [/v1/identity/role]("")
   * DELETE
-    * 사용자 제거 : [/Api/RemoveUser]("")
+    * 사용자 제거 : [/v1/identity/user]("")
 
 ![SwaggerAPIs](./Snapshot/SwaggerAPIs.PNG)
 
