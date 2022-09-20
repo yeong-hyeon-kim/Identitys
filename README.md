@@ -9,13 +9,13 @@
 
 ## 🏷️ 기능(Function)
 
-1. 사용자`(Identity Users)` 관리
+1. 사용자(`Identity Users`)관리
    1. 사용자 등록(Registration User.)
    2. 사용자 조회(Select Users.)
    3. 사용자 업데이트(Update User information.)
    4. 사용자 제거(Delete User)
    5. 사용자 잠금 해제(Remove Account Lock.)
-2. 역할`(Identity Roles)` 관리
+2. 역할(`Identity Roles`) 관리
    1. 권한 등록(Registration Roles.)
    2. 권한 조회(Select Roles.)  
    3. 권한 업데이트(Update Role.)
@@ -118,11 +118,11 @@
 
 #### Package Manage Console
 
-* `User Database`
+User Database
 
 > "update-database -Context `AppDbContext`"
 
-* `Identity Database`
+Identity Database
 
 > "update-database -Context `ApplicationDbContext`"
 
