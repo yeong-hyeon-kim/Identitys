@@ -183,13 +183,9 @@
 
 <script>
     (function () {
-        requestAuthorizationList();
+        RequestAuthorizationList();
     }());
 
-    // 역할 리스트 요청
-    function requestAuthorizationList() {
-        let RequestURL = defaultRequesteURL + "GetRolesList"
-        $.getJSON(RequestURL, getAuthorizationList);
     }
 
     // 역할 리스트 표시

@@ -1,5 +1,6 @@
-﻿const defaultURL = window.location.protocol + "//" + window.location.host + "/";
-const defaultRequesteURL = defaultURL + "Api/";
+﻿const apiVersion = "v1"
+const defaultURL = window.location.protocol + "//" + window.location.host + "/";
+const defaultRequesteURL = defaultURL + apiVersion + "/identity/";
 
 function locationAdminPage() {
   location.href = defaultURL + "Admin";
@@ -38,7 +39,6 @@ function locationLockListPage() {
 }
 
 // Theme
-
 var ThemeMode = "";
 var ThemeClassValue = "text-center bg-black";
 
@@ -96,16 +96,29 @@ let ChangeTheme = (e) => {
 
 // Request APIs
 const APIList = {
-  GET: { "": "" },
-  POST: { "Insert Role": "InsertRole?" },
+  GET: { "SELECT-ROLE": "role" },
+  POST: { "INSERT-ROLE": "role?" },
   PUT: [
-    { "Update User Infomation": "UpdateUserInfomation?" },
-    { "Update User Infomation": "UpdateRole?" },
+    { "UPDATE-USER": "user?" },
+    { "UPDATE-ROLE": "role?" },
   ],
-  DELETE: [{ "Remove User": "RemoveUser?" }, { "Delete Role": "DeleteRole?" }],
+    DELETE: [
+    { "DELETE-USER": "user?" },
+    { "DELETE-ROLE": "role?" }
+   ],
 };
 
-// Index View.
+let RequestAuthorizationList = () => {
+    let RequestApiURL = "";
+    let APIArgument = "";
+
+    RequestApiURL +=
+        defaultRequesteURL + APIList["GET"]["SELECT-ROLE"] + APIArgument;
+
+    console.log(RequestApiURL);
+    $.getJSON(RequestApiURL, getAuthorizationList);
+}
+
 let RequestUpdateUserInfomation = () => {
   let RequestApiURL = "";
   let APIArgument = "UserCd=" + $("#UserCd").val();
@@ -115,7 +128,7 @@ let RequestUpdateUserInfomation = () => {
   APIArgument += "&UserAuthorization=" + $("#AuthorizationName").val();
 
   RequestApiURL +=
-    defaultRequesteURL + APIList["PUT"]["Update User Infomation"] + APIArgument;
+    defaultRequesteURL + APIList["PUT"]["UPDATE-USER"] + APIArgument;
 
   console.log(RequestApiURL);
   requestAJAX(RequestApiURL, "PUT");
@@ -127,13 +140,12 @@ let RequestDeleteUser = () => {
   APIArgument += "&RemoveUserId=" + $("#RemoveUserId").val();
 
   RequestApiURL +=
-    defaultRequesteURL + APIList["DELETE"]["Remove User"] + APIArgument;
+    defaultRequesteURL + APIList["DELETE"]["DELETE-USER"] + APIArgument;
 
   console.log(RequestApiURL);
   requestAJAX(RequestApiURL, "DELETE");
 };
 
-// Roles List View
 let RequestUpdateRole = () => {
   let RequestApiURL = "";
   let APIArgument = "UserCd=" + $("#UserCd").val();
@@ -143,7 +155,7 @@ let RequestUpdateRole = () => {
   APIArgument += "&UserAuthorization=" + $("#UserAuthorization").val();
 
   RequestApiURL +=
-    defaultRequesteURL + APIList["PUT"]["Update Role"] + APIArgument;
+      defaultRequesteURL + APIList["PUT"]["UPDATE-ROLE"] + APIArgument;
 
   console.log(RequestApiURL);
   requestAJAX(RequestApiURL, "PUT");
@@ -166,7 +178,7 @@ let RequestInsertRole = () => {
   APIArgument += "&RoleName=" + $("#RegisterRoleName").val();
 
   RequestApiURL +=
-    defaultRequesteURL + APIList["POST"]["Insert Role"] + APIArgument;
+    defaultRequesteURL + APIList["POST"]["INSERT-ROLE"] + APIArgument;
 
   console.log(RequestApiURL);
   requestAJAX(RequestApiURL, "POST");

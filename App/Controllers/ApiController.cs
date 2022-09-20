@@ -2,14 +2,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
-
 namespace ALIMS.Controllers
 {
     [ApiExplorerSettings(GroupName = "APIS")]
-    [Route("[controller]/[action]")]
+    // 접두사 "V"로 버전을 지정하고 지속적인 버전 관리를 합니다..
+    [Route("/v1/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
     {
+        const string API_VERSION = "v1";
         private readonly AppLogic _AppBll;
 
         public ApiController(AppLogic AppBll)
@@ -23,6 +24,9 @@ namespace ALIMS.Controllers
         /// </summary>
         /// <param name="UserEmail">사용자 이메일</param>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/user")]
+        // URI 경로의 마지막에는 슬래시(/)를 사용하지 않습니다.
+        // 구분자로 밑줄(_) 대신 하이픈(-)을 사용합니다.
         [HttpGet]
         public string GetUserInfo(string UserEmail)
         {
@@ -34,6 +38,7 @@ namespace ALIMS.Controllers
         /// 역할(권한)이 없는 사용자 조회
         /// </summary>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role/null")]
         [HttpGet]
         public string GetIdentityNullRoleUsers()
         {
@@ -45,6 +50,7 @@ namespace ALIMS.Controllers
         /// 미등록 사용자 조회
         /// </summary>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/user/null")]
         [HttpGet]
         public string GetIdentityNullUsers()
         {
@@ -56,6 +62,7 @@ namespace ALIMS.Controllers
         /// 사용자 권한 리스트
         /// </summary>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role")]
         [HttpGet]
         public string GetRolesList()
         {
@@ -69,6 +76,7 @@ namespace ALIMS.Controllers
         /// <param name="RoleId">역할 ID</param>
         /// <param name="RoleName">역할 명</param>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role")]
         [HttpPut]
         public IActionResult UpdateRole(string RoleId, string RoleName)
         {
@@ -83,6 +91,7 @@ namespace ALIMS.Controllers
         /// <param name="UserId">사용자 ID</param>
         /// <param name="UserCd">사용자 CD</param>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/user")]
         [HttpDelete]
         public IActionResult RemoveUser(string UserId, string UserCd)
         {
@@ -100,6 +109,7 @@ namespace ALIMS.Controllers
         /// <param name="UserContact"></param>
         /// <param name="UserAuthorization"></param>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/user")]
         [HttpPut]
         public IActionResult UpdateUserInfomation(string UserCd, string UserEmails, string UserDept, string UserContact, string UserAuthorization)
         {
@@ -115,6 +125,7 @@ namespace ALIMS.Controllers
         /// <param name="RoleId"></param>
         /// <param name="RoleName"></param>
         /// <returns></returns>
+        [Route($"/{API_VERSION}/identity/role")]
         [HttpPost]
         public IActionResult InsertRole(string RoleId, string RoleName)
         {
