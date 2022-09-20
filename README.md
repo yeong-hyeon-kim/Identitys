@@ -5,7 +5,7 @@
 * 기본적으로 제공되는 `Identity Migration`을 활용하여 사용자 관리 기능을 확장합니다.
 * 영문으로 작성된 `Identity` 양식을 한글화 합니다.
 
-![홈](./Snapshot/Home.PNG)
+![홈](./Resource/Snapshot/Home.PNG)
 
 ## 🏷️ 기능(Function)
 
@@ -33,7 +33,7 @@
 2. 특정 역할(권한)의 명칭을 수정합니다.
 3. 특정 역할(권한)을 삭제합니다.
 
-![역할(권한) 조회](./Snapshot/Roles.PNG)
+![역할(권한) 조회](./Resource/Snapshot/Roles.PNG)
 
 #### 사용자 관리
 
@@ -41,7 +41,7 @@
 2. 사용자별 역할(권한) 및 정보를 수정합니다.
 3. 사용자를 삭제합니다.
 
-![사용자 관리](./Snapshot/Users.PNG)
+![사용자 관리](./Resource/Snapshot/Users.PNG)
 
 #### 미승인 사용자
 
@@ -49,7 +49,7 @@
 2. 미승인 사용자를 삭제합니다.
 3. 역할(권한)을 부여하여 승인합니다.
 
-![미승인 사용자](./Snapshot/Authorization.PNG)
+![미승인 사용자](./Resource/Snapshot/Authorization.PNG)
 
 #### 미등록 사용자
 
@@ -59,7 +59,7 @@
 
 1. ID 및 PW 오류로 계정이 잠금 상태일 경우 해제합니다.
 
-![사용자 잠금 해제](./Snapshot/AccountLock.PNG)
+![사용자 잠금 해제](./Resource/Snapshot/AccountLock.PNG)
 
 ## 💻 개발 환경(Develop Environment)
 
@@ -98,7 +98,7 @@
   * DELETE
     * 사용자 제거 : [/v1/identity/user]("")
 
-![SwaggerAPIs](./Snapshot/SwaggerAPI.PNG)
+![SwaggerAPIs](./Resource/Snapshot/SwaggerAPI.PNG)
 
 ## 📖 비고(Remark)
 
