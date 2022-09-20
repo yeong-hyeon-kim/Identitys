@@ -18,9 +18,17 @@ namespace ALIMS.Controllers
             _AppBll = AppBll;
         }
 
-        #region 사용자
+        #region 사용자(User)
+        [Route($"/{API_VERSION}/identity/user")]
+        [HttpPost]
+        public IActionResult CreateUser(string UserId, string UserPassword, bool EmailConfirmation)
+        {
+            _AppBll.CreateIdentityUser(UserId, UserId, UserPassword, EmailConfirmation);
+            return Ok();
+        }
+
         /// <summary>
-        /// 사용자 정보
+        /// 사용자(User) 조회
         /// </summary>
         /// <param name="UserEmail">사용자 이메일</param>
         /// <returns></returns>

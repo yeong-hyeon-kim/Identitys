@@ -1,8 +1,10 @@
-﻿using App.DAL.CONTEXT;
+﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Cryptography;
+using System.Diagnostics;
+using App.DAL.CONTEXT;
 using App.IDAL;
 using App.Model;
-using Microsoft.AspNetCore.Identity;
-using System.Diagnostics;
 
 namespace App.DAL
 {
@@ -15,6 +17,23 @@ namespace App.DAL
         {
             _context = new AppDbContext();
             _identity_context = new ApplicationDbContext();
+        }
+
+        public string GeneratePasswordHash(string Password)
+        {
+            // Generate a 128-bit salt using a sequence of
+            // cryptographically strong random bytes.
+            byte[] salt = RandomNumberGenerator.GetBytes(128 / 8); // divide by 8 to convert bits to bytes
+
+            // derive a 256-bit subkey (use HMACSHA256 with 100,000 iterations)
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: Password!,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256,
+                iterationCount: 100000,
+                numBytesRequested: 256 / 8));
+
+            return hashed;
         }
 
         #region 사용자
@@ -38,6 +57,24 @@ namespace App.DAL
                 {
                     Debug.WriteLine(e.Message);
                     return UserList;
+                }
+            }
+        }
+
+
+
+        public void CreateIdentityUser(string UserId, string Email, string UserPassword, bool EmailConfirmation)
+        {
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    db.Users.Add(new IdentityUser { UserName = UserId, Email = Email, NormalizedUserName = UserId.ToUpper(), NormalizedEmail = Email.ToUpper(), PasswordHash = GeneratePasswordHash(UserPassword), EmailConfirmed = EmailConfirmation });
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
                 }
             }
         }

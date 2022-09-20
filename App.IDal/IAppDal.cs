@@ -1,5 +1,5 @@
-﻿using App.Model;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
+using App.Model;
 
 namespace App.IDAL
 {
@@ -12,6 +12,7 @@ namespace App.IDAL
         List<Users> GetIdentityNullRoleUsers();
         List<Users> GetIdentityNullUsers();
 
+        public void CreateIdentityUser(string UserId, string Email, string UserPassword, bool EmailConfirmation);
         public void CreateUser(string UserCd, string UserNm, string UserDept, string UserEmail, string UserContact = "");
         public void UpdateUser(string UserCd, string UserDept, string UserContact);
         public void DeleteUser(string UserId, string UserCd);

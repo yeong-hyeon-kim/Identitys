@@ -1,6 +1,6 @@
-﻿using App.IDAL;
+﻿using Microsoft.AspNetCore.Identity;
+using App.IDAL;
 using App.Model;
-using Microsoft.AspNetCore.Identity;
 
 namespace App.BLL
 {
@@ -56,6 +56,11 @@ namespace App.BLL
         public void GrantAuthorizationUser(string UserEmail, string RoleName)
         {
             _appDal.GrantAuthorizationUser(UserEmail, RoleName);
+        }
+
+        public void CreateIdentityUser(string UserId, string Email, string UserPassword, bool EmailConfirmation)
+        {
+            _appDal.CreateIdentityUser(UserId, Email, UserPassword, EmailConfirmation);
         }
 
         public void UpdateUser(string UserCd, string UserDept, string UserContact)
