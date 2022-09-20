@@ -98,7 +98,7 @@
   * DELETE
     * 사용자 제거 : [/v1/identity/user]("")
 
-![SwaggerAPIs](./Snapshot/SwaggerAPIs.PNG)
+![SwaggerAPIs](./Snapshot/SwaggerAPI.PNG)
 
 ## 📖 비고(Remark)
 
