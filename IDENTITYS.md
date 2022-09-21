@@ -12,7 +12,7 @@
 |EmailConfirmed |이메일 인증 여부|
 |PasswordHash |패스워드 해시 변환 값|
 |SecurityStamp |사용자 자격 증명이 변경될 때마다 변경해야 하는 임의 값(암호 변경, 로그인 제거)|
-|ConcurrencyStamp |사용자가 저장소에 유지될 때마다 변경해야 하는 임의 값|
+|ConcurrencyStamp |사용자들의 동시성 제어를 위한 임의 값|
 |PhoneNumber |휴대전화 번호|
 |PhoneNumberConfirmed |휴대전호 번호 인증 여부|
 |TwoFactorEnabled |사용자에 대해 2단계 인증이 사용되는지 여부를 나타내는 값|
@@ -32,7 +32,7 @@
 
 |필드(Field)|내용(Content)|
 |-|-|
-|UserId| 사용자 Id |
+|UserId|사용자 ID|
 |RoleId|역할(권한)명|
 
 ## AspNetUserClaims
@@ -40,6 +40,6 @@
 |필드(Field)|내용(Content)|예시(Example)|
 |-|-|-|
 |Id|RoleClaims 기본키|
-|RoleId| 역할(권한) Id|
+|RoleId| 역할(권한) ID|
 |ClaimType| 역할 그룹명|개발팀 포지션|
-|ClaimValue| 역할 그룹에 속한 요소|프론트 엔드, 벡 엔드|
+|ClaimValue| 역할 그룹에 속한 요소|Front-End Back-End|
