@@ -16,7 +16,7 @@ namespace App.Controllers
         {
             ViewData["Theme"] = HttpContext.Session.GetString("Theme");
 
-            return View(_AppBll.GetIdentityUsers());
+            return View();
         }
 
         public IActionResult AuthorizationList()

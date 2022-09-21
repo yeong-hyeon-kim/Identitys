@@ -1,6 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using App.IDAL;
+﻿using App.IDAL;
 using App.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace App.BLL
 {

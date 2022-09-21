@@ -1,6 +1,7 @@
 ﻿using App.BLL;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ALIMS.Controllers
 {
@@ -32,14 +33,20 @@ namespace ALIMS.Controllers
         /// </summary>
         /// <param name="UserEmail">사용자 이메일</param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/user")]
+        [Route($"/{API_VERSION}/identity/personal")]
         // URI 경로의 마지막에는 슬래시(/)를 사용하지 않습니다.
         // 구분자로 밑줄(_) 대신 하이픈(-)을 사용합니다.
         [HttpGet]
         public string GetUserInfo(string UserEmail)
         {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetUser(UserEmail));
-            return JsonSerialize;
+            return JsonConvert.SerializeObject(_AppBll.GetUser(UserEmail));
+        }
+
+        [HttpGet]
+        [Route($"/{API_VERSION}/identity/user")]
+        public string GetUserList()
+        {
+            return JsonConvert.SerializeObject(_AppBll.GetIdentityUsers()).Replace("null", "\"\"");
         }
 
         /// <summary>
@@ -101,7 +108,6 @@ namespace ALIMS.Controllers
         }
 
         #endregion
-
 
         #region 역할(Role)
 

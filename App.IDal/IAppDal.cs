@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
-using App.Model;
+﻿using App.Model;
+using Microsoft.AspNetCore.Identity;
 
 namespace App.IDAL
 {

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-using Microsoft.AspNetCore.Identity;
-using System.Security.Cryptography;
-using System.Diagnostics;
-using App.DAL.CONTEXT;
+﻿using App.DAL.CONTEXT;
 using App.IDAL;
 using App.Model;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
+using System.Diagnostics;
+using System.Security.Cryptography;
 
 namespace App.DAL
 {
