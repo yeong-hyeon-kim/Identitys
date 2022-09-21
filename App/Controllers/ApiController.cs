@@ -1,7 +1,6 @@
 ﻿using App.BLL;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace ALIMS.Controllers
 {
@@ -37,16 +36,16 @@ namespace ALIMS.Controllers
         // URI 경로의 마지막에는 슬래시(/)를 사용하지 않습니다.
         // 구분자로 밑줄(_) 대신 하이픈(-)을 사용합니다.
         [HttpGet]
-        public string GetUserInfo(string UserEmail)
+        public IActionResult GetUserInfo(string UserEmail)
         {
-            return JsonConvert.SerializeObject(_AppBll.GetUser(UserEmail));
+            return Ok(JsonConvert.SerializeObject(_AppBll.GetUser(UserEmail)));
         }
 
         [HttpGet]
         [Route($"/{API_VERSION}/identity/user")]
-        public string GetUserList()
+        public IActionResult GetUserList()
         {
-            return JsonConvert.SerializeObject(_AppBll.GetIdentityUsers()).Replace("null", "\"\"");
+            return Ok(JsonConvert.SerializeObject(_AppBll.GetIdentityUsers()).Replace("null", "\"\""));
         }
 
         /// <summary>
@@ -89,10 +88,9 @@ namespace ALIMS.Controllers
         /// <returns></returns>
         [Route($"/{API_VERSION}/identity/role/null")]
         [HttpGet]
-        public string GetIdentityNullRoleUsers()
+        public IActionResult GetIdentityNullRoleUsers()
         {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetIdentityNullRoleUsers());
-            return JsonSerialize;
+            return Ok(JsonConvert.SerializeObject(_AppBll.GetIdentityNullRoleUsers()));
         }
 
         /// <summary>
@@ -101,10 +99,9 @@ namespace ALIMS.Controllers
         /// <returns></returns>
         [Route($"/{API_VERSION}/identity/user/null")]
         [HttpGet]
-        public string GetIdentityNullUsers()
+        public IActionResult GetIdentityNullUsers()
         {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetIdentityNullUsers());
-            return JsonSerialize;
+            return Ok(JsonConvert.SerializeObject(_AppBll.GetIdentityNullUsers()));
         }
 
         #endregion
@@ -117,10 +114,9 @@ namespace ALIMS.Controllers
         /// <returns></returns>
         [Route($"/{API_VERSION}/identity/role")]
         [HttpGet]
-        public string GetRolesList()
+        public IActionResult GetRolesList()
         {
-            string JsonSerialize = JsonConvert.SerializeObject(_AppBll.GetRolesList());
-            return JsonSerialize;
+            return Ok(JsonConvert.SerializeObject(_AppBll.GetRolesList()));
         }
 
         /// <summary>
