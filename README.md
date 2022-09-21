@@ -102,7 +102,7 @@
 
 ## 📖 비고(Remark)
 
-### 1. 데이터베이스 연결[Database Connection]
+### 1. 데이터베이스 연결(Database Connection)
 
 * 자세한 내용은 [appsettings](./App/appsettings.json)에서 확인할 수 있습니다.
 
@@ -114,7 +114,7 @@
 
 > "APP.INDENTITY": "Server=`Server IP`, `Port`; Database=APP.Identity; User Id=`Login User ID`; Password=`Login User PW`;"
 
-### 2. 데이터베이스 업데이트(구조 동기화) [Database Update(Sync Structure)]
+### 2. 데이터베이스 마이그레이션(Database Migration)
 
 #### Package Manage Console
 
