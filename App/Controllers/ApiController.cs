@@ -5,7 +5,27 @@ using Newtonsoft.Json;
 namespace ALIMS.Controllers
 {
     [ApiExplorerSettings(GroupName = "APIS")]
-    // 접두사 "V"로 버전을 지정하고 지속적인 버전 관리를 합니다..
+    /* REST API */
+
+    /* HTTP METHOD */
+    // 메서드 자체 의미로 행위를 포함합니다.
+    // POST   - 생성
+    // GET    - 조회
+    // PUT    - 수정
+    // DELETE - 삭제
+
+    /* URL Design */
+    // 계층 관계는 슬래시 구분자(/) 사용하기
+    // URL 경로 구성은 소문자 사용하기
+    // URL 경로 마지막은 슬래시(/) 사용하지 않기
+    // URL 경로가 길어질 경우 하이픈(-)으로 높이기
+
+    /* HT경로 Status Code */    // 200 : 정상
+    // 401 : 인증되지 않은 요청입니다.
+    // 404 : 클라이언트가 요청한 리소스가 없습니다.
+    // 405 : 요청한 리소스에서 사용 불가능한 Method 입니다.
+    // 500 : 서버 문제
+
     [Route("/v1/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
@@ -33,8 +53,6 @@ namespace ALIMS.Controllers
         /// <param name="UserEmail">사용자 이메일</param>
         /// <returns></returns>
         [Route($"/{API_VERSION}/identity/personal")]
-        // URI 경로의 마지막에는 슬래시(/)를 사용하지 않습니다.
-        // 구분자로 밑줄(_) 대신 하이픈(-)을 사용합니다.
         [HttpGet]
         public IActionResult GetUserInfo(string UserEmail)
         {
