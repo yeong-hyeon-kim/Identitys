@@ -1,10 +1,10 @@
 ﻿using App.BLL;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using App.Attributes;
 
-namespace ALIMS.Controllers
+namespace App.Controllers
 {
-    [ApiExplorerSettings(GroupName = "APIS")]
     /* REST API */
 
     /* HTTP METHOD */
@@ -26,7 +26,7 @@ namespace ALIMS.Controllers
     // 404 : 클라이언트가 요청한 리소스가 없습니다.
     // 405 : 요청한 리소스에서 사용 불가능한 Method 입니다.
     // 500 : 서버 문제
-
+    [ApiKey]
     [Route("/v1/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
