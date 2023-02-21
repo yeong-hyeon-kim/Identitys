@@ -3,6 +3,7 @@ using App.DAL;
 using App.Data;
 using App.IDAL;
 using App.Services.Email;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc.Controllers;
@@ -80,6 +81,32 @@ builder.Services.AddSwaggerGen(c =>
         throw new InvalidOperationException("Unable to determine tag for endpoint.");
     });
     c.DocInclusionPredicate((name, api) => true);
+
+    // Include 'SecurityScheme' to use JWT Authentication
+    //  Name : Header API KEY Name
+    var jwtSecurityScheme = new OpenApiSecurityScheme
+    {
+        BearerFormat = "JWT",
+        Name = "X-API-Key",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = JwtBearerDefaults.AuthenticationScheme,
+        Description = "Authentication API KEY",
+
+        Reference = new OpenApiReference
+        {
+            Id = JwtBearerDefaults.AuthenticationScheme,
+            Type = ReferenceType.SecurityScheme
+        }
+    };
+
+    c.AddSecurityDefinition(jwtSecurityScheme.Reference.Id, jwtSecurityScheme);
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+        { jwtSecurityScheme, Array.Empty<string>() }
+    });
+
 });
 
 
