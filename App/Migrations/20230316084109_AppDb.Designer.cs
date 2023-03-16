@@ -11,33 +11,31 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Migrations.AppDb
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20220408073042_AppDb")]
+    [Migration("20230316084109_AppDb")]
     partial class AppDb
     {
+        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "7.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("App.MODEL.Users", b =>
+            modelBuilder.Entity("App.Model.Users", b =>
                 {
                     b.Property<string>("USER_CD")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("REMARK")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("USER_CONTACT")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("USER_DEPT")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("USER_EMAIL")
