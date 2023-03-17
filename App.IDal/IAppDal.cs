@@ -16,6 +16,7 @@ namespace App.IDAL
         public void CreateUser(string UserCd, string UserNm, string UserDept, string UserEmail, string UserContact = "");
         public void UpdateUser(string UserCd, string UserDept, string UserContact);
         public void DeleteUser(string UserId, string UserCd);
+        public void DeleteLocalUser(string UserCd);
 
         #endregion
 

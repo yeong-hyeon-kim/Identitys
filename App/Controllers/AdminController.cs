@@ -76,6 +76,14 @@ namespace App.Controllers
         }
 
         [HttpPost]
+        public IActionResult DeleteLocalUser(string UserCd)
+        {
+            _AppBll.DeleteLocalUser(UserCd);
+
+            return Redirect("~/Admin/Index");
+        }
+
+        [HttpPost]
         public IActionResult DeleteRole(string RoleId)
         {
             _AppBll.DeleteRole(RoleId);

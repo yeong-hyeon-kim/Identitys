@@ -87,6 +87,15 @@ namespace App.Controllers
             return Ok();
         }
 
+        [Route($"/{API_VERSION}/identity/local/user")]
+        [HttpDelete]
+        public IActionResult RemoveLocalUser(string UserCd)
+        {
+            _AppBll.DeleteLocalUser(UserCd);
+
+            return Ok();
+        }
+
         /// <summary>
         /// 사용자(User) 수정
         /// </summary>
