@@ -201,6 +201,28 @@ namespace App.DAL
             }
         }
 
+        public void DeleteLocalUser(string UserCd)
+        {
+            try
+            {
+                // Remove User
+                using (var db = _context)
+                {
+                    var Model = db.USERS.First(x => x.USER_CD.Equals(UserCd));
+
+                    if (Model != null)
+                    {
+                        db.USERS.Remove(Model);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
         /// <summary>
         /// 사용자 권한 및 정보 조회
         /// </summary>

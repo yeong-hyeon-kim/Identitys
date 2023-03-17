@@ -26,7 +26,11 @@ namespace App.Controllers
     // 404 : 클라이언트가 요청한 리소스가 없습니다.
     // 405 : 요청한 리소스에서 사용 불가능한 Method 입니다.
     // 500 : 서버 문제
+
+#if !DEBUG
     [ApiKey]
+#endif
+
     [Route("/v1/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
@@ -39,11 +43,12 @@ namespace App.Controllers
             _AppBll = AppBll;
         }
 
-        #region 사용자(User)
+#region 사용자(User)
         [Route($"/{API_VERSION}/identity/user")]
         [HttpPost]
         public IActionResult CreateUser(string UserId, string UserPassword, bool EmailConfirmation)
         {
+            // Identity User
             _AppBll.CreateIdentityUser(UserId, UserId, UserPassword, EmailConfirmation);
             return Ok();
         }
@@ -78,6 +83,15 @@ namespace App.Controllers
         public IActionResult RemoveUser(string UserId, string UserCd)
         {
             _AppBll.DeleteUser(UserId, UserCd);
+
+            return Ok();
+        }
+
+        [Route($"/{API_VERSION}/identity/local/user")]
+        [HttpDelete]
+        public IActionResult RemoveLocalUser(string UserCd)
+        {
+            _AppBll.DeleteLocalUser(UserCd);
 
             return Ok();
         }
@@ -123,9 +137,9 @@ namespace App.Controllers
             return Ok(JsonConvert.SerializeObject(_AppBll.GetIdentityNullUsers()));
         }
 
-        #endregion
+#endregion
 
-        #region 역할(Role)
+#region 역할(Role)
 
         /// <summary>
         /// 역할(Role) 조회
@@ -181,6 +195,6 @@ namespace App.Controllers
 
             return Ok();
         }
-        #endregion
+#endregion
     }
 }
