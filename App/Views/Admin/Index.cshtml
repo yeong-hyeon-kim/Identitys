@@ -165,7 +165,7 @@
         let html = "";
         $("#TableList tr").empty();
 
-        if(Object.keys(data).length == 0){
+        if(Object.keys(data).length != 0){
             for (var i = 0; i < Object.keys(data).length; i++) {
                 html += "<tr>"
                 html += `<td id=USER_ID_${data[i]['USER_CD']}>${data[i]['USER_ID']}</td>`
