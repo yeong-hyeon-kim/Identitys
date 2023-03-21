@@ -1,7 +1,6 @@
 ﻿using App.BLL;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using App.Attributes;
 
 namespace App.Controllers
 {
