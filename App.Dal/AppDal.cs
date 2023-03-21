@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
 using System.Diagnostics;
 using System.Security.Cryptography;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace App.DAL
 {
@@ -19,6 +20,11 @@ namespace App.DAL
             _identity_context = new ApplicationDbContext();
         }
 
+        /// <summary>
+        /// 패스워드 해시 생성
+        /// </summary>
+        /// <param name="Password">비밀번호</param>
+        /// <returns></returns>
         public string GeneratePasswordHash(string Password)
         {
             // Generate a 128-bit salt using a sequence of
@@ -60,8 +66,6 @@ namespace App.DAL
                 }
             }
         }
-
-
 
         public void CreateIdentityUser(string UserId, string Email, string UserPassword, bool EmailConfirmation)
         {
@@ -201,6 +205,10 @@ namespace App.DAL
             }
         }
 
+        /// <summary>
+        /// 로컬 사용자 제거
+        /// </summary>
+        /// <param name="UserCd">사용자 CD</param>
         public void DeleteLocalUser(string UserCd)
         {
             try
@@ -574,11 +582,40 @@ namespace App.DAL
         }
 
         /// <summary>
+        /// 사용자 계정 잠금
+        /// </summary>
+        /// <param name="UserId">사용자 ID</param>
+        /// <param name="Date">계정 잠금 기간</param>
+        public void LockingUser(string UserId, DateTime Date)
+        {
+            try
+            {
+                using (var db = _identity_context)
+                {
+                    var Model = db.Users.First(x => x.Id.Equals(UserId));
+
+                    Model.LockoutEnd = new DateTimeOffset(Date);
+                    Model.LockoutEnabled = true;
+
+                    if (Model != null)
+                    {
+                        db.Users.Update(Model);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
+        }
+
+        /// <summary>
         /// 계정 잠금 해제
         /// </summary>
         /// <param name="LockUserId">사용자 ID</param>
         /// <param name="LockoutEnabled">잠금 사용 여부</param>
-        public void DeleteLock(string LockUserId, bool LockoutEnabled)
+        public void UnLockingUser(string LockUserId, bool LockoutEnabled)
         {
             string UserEmail = string.Empty;
 
@@ -629,25 +666,18 @@ namespace App.DAL
         public List<Users> GetLockList()
         {
             // Identity Lock List
-            dynamic? LockList = null;
+            List<IdentityUser>? LockList = null;
             List<Users> LockUserList = new List<Users>();
 
-            using (var db = _identity_context)
+            try
             {
-                try
+                using (var db = _identity_context)
                 {
-                    // 잠금 기능을 사용하고 유효기간이 현재 일시보다 미래일 시 잠금 중으로 판단.
+                    // 잠금 기능을 사용하고 유효기간이 현재 일시보다 미래라면 잠금 중으로 판단합니다.
                     LockList = db.Users.Where(x => x.LockoutEnabled.Equals(true) && x.LockoutEnd > DateTimeOffset.Now).ToList();
                 }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-            }
 
-            using (var db = _context)
-            {
-                try
+                using (var db = _context)
                 {
                     if (LockList != null)
                     {
@@ -660,13 +690,41 @@ namespace App.DAL
                         }
                     }
                 }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
             }
 
             return LockUserList;
+        }
+
+        /// <summary>
+        /// 사용자 이메일 검증 여부(비밀번호 초기화 메일 전송 이용)
+        /// </summary>
+        /// <param name="UserEmail"></param>
+        /// <param name="IsConfirm"></param>
+        public void SetEmailConfirm(string UserEmail, bool IsConfirm)
+        {
+            try
+            {
+                using (var db = _identity_context)
+                {
+                    var Model = db.Users.First(x => x.Email.Equals(UserEmail));
+
+                    Model.EmailConfirmed = IsConfirm;
+
+                    if (Model != null)
+                    {
+                        db.Users.Update(Model);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e.Message);
+            }
         }
 
         #endregion
@@ -725,7 +783,7 @@ namespace App.DAL
         /// </summary>
         /// <param name="RoleId">Role Id</param>
         /// <param name="RoleNm"></param>
-        public void InsertRole(string RoleId, string RoleNm)
+        public void CreateRole(string RoleId, string RoleNm)
         {
             using (var db = _identity_context)
             {
@@ -780,7 +838,6 @@ namespace App.DAL
                 Debug.WriteLine(e.Message);
             }
         }
-
         #endregion
     }
 }

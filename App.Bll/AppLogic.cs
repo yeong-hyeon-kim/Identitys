@@ -48,9 +48,14 @@ namespace App.BLL
             return _appDal.GetLockList();
         }
 
+        public void LockingUser(string UserId, DateTime Date)
+        {
+            _appDal.LockingUser(UserId, Date);
+        }
+
         public void DeleteLock(string LockUserId, bool LockoutEnabled)
         {
-            _appDal.DeleteLock(LockUserId, LockoutEnabled);
+            _appDal.UnLockingUser(LockUserId, LockoutEnabled);
         }
 
         public void GrantAuthorizationUser(string UserEmail, string RoleName)
@@ -78,6 +83,14 @@ namespace App.BLL
             _appDal.DeleteLocalUser(UserCd);
         }
 
+        public void SetEmailConfirm(string UserEmail, bool IsEmailConfirm)
+        {
+            _appDal.SetEmailConfirm(UserEmail, IsEmailConfirm);
+        }
+        #endregion
+
+
+        #region 역할
         public void DeleteRole(string RoleId)
         {
             _appDal.DeleteRole(RoleId);
@@ -85,7 +98,7 @@ namespace App.BLL
 
         public void InsertRole(string RoleId, string RoleNm)
         {
-            _appDal.InsertRole(RoleId, RoleNm);
+            _appDal.CreateRole(RoleId, RoleNm);
         }
 
         public void UpdateRole(string RoleId, string RoleNm)

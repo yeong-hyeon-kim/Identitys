@@ -43,8 +43,8 @@ namespace App.Controllers
             _AppBll = AppBll;
         }
 
-#region 사용자(User)
-        [Route($"/{API_VERSION}/identity/user")]
+        #region 사용자(User)
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         [HttpPost]
         public IActionResult CreateUser(string UserId, string UserPassword, bool EmailConfirmation)
         {
@@ -58,7 +58,7 @@ namespace App.Controllers
         /// </summary>
         /// <param name="UserEmail">사용자 이메일</param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/personal")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/info")]
         [HttpGet]
         public IActionResult GetUserInfo(string UserEmail)
         {
@@ -66,7 +66,7 @@ namespace App.Controllers
         }
 
         [HttpGet]
-        [Route($"/{API_VERSION}/identity/user")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         public IActionResult GetUserList()
         {
             return Ok(JsonConvert.SerializeObject(_AppBll.GetIdentityUsers()).Replace("null", "\"\""));
@@ -78,7 +78,7 @@ namespace App.Controllers
         /// <param name="UserId">사용자 ID</param>
         /// <param name="UserCd">사용자 CD</param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/user")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         [HttpDelete]
         public IActionResult RemoveUser(string UserId, string UserCd)
         {
@@ -87,7 +87,7 @@ namespace App.Controllers
             return Ok();
         }
 
-        [Route($"/{API_VERSION}/identity/local/user")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/local")]
         [HttpDelete]
         public IActionResult RemoveLocalUser(string UserCd)
         {
@@ -105,7 +105,7 @@ namespace App.Controllers
         /// <param name="UserContact"></param>
         /// <param name="UserAuthorization"></param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/user")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         [HttpPut]
         public IActionResult UpdateUserInfomation(string UserCd, string UserEmails, string UserDept, string UserContact, string UserAuthorization)
         {
@@ -119,7 +119,7 @@ namespace App.Controllers
         /// 역할(Role)이 없는 사용자(User) 조회
         /// </summary>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role/null")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/role/null")]
         [HttpGet]
         public IActionResult GetIdentityNullRoleUsers()
         {
@@ -130,22 +130,57 @@ namespace App.Controllers
         /// 미등록 사용자(User) 조회
         /// </summary>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/user/null")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/null")]
         [HttpGet]
         public IActionResult GetIdentityNullUsers()
         {
             return Ok(JsonConvert.SerializeObject(_AppBll.GetIdentityNullUsers()));
         }
 
-#endregion
+        /// <summary>
+        /// 계정이 잠긴 사용자 조회
+        /// </summary>
+        /// <returns></returns>
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/lock")]
+        [HttpGet]
+        public IActionResult GetLockedUser()
+        {
+            return Ok(JsonConvert.SerializeObject(_AppBll.GetLockList()));
+        }
 
-#region 역할(Role)
+        /// <summary>
+        /// 사용자 잠금 설정
+        /// </summary>
+        /// <returns></returns>
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/lock")]
+        [HttpPut]
+        public IActionResult LockingUser(string UserId, DateTime Date)
+        {
+            _AppBll.LockingUser(UserId, Date);
+            return Ok();
+        }
+
+        /// <summary>
+        /// 사용자 이메일 확인
+        /// </summary>
+        /// <returns></returns>
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/email/confirm")]
+        [HttpPut]
+        public IActionResult SetEmailConfirm(string UserEmail, bool IsConfirm)
+        {
+            _AppBll.SetEmailConfirm(UserEmail, IsConfirm);
+            return Ok();
+        }
+
+        #endregion
+
+        #region 역할(Role)
 
         /// <summary>
         /// 역할(Role) 조회
         /// </summary>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role")]
+        [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpGet]
         public IActionResult GetRolesList()
         {
@@ -158,7 +193,7 @@ namespace App.Controllers
         /// <param name="RoleId"></param>
         /// <param name="RoleName"></param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role")]
+        [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpPost]
         public IActionResult InsertRole(string RoleId, string RoleName)
         {
@@ -173,7 +208,7 @@ namespace App.Controllers
         /// <param name="RoleId">역할 ID</param>
         /// <param name="RoleName">역할 명</param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role")]
+        [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpPut]
         public IActionResult UpdateRole(string RoleId, string RoleName)
         {
@@ -187,7 +222,7 @@ namespace App.Controllers
         /// </summary>
         /// <param name="RoleId"></param>
         /// <returns></returns>
-        [Route($"/{API_VERSION}/identity/role")]
+        [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpDelete]
         public IActionResult DeleteRole(string RoleId)
         {
@@ -195,6 +230,6 @@ namespace App.Controllers
 
             return Ok();
         }
-#endregion
+        #endregion
     }
 }
