@@ -77,7 +77,7 @@ namespace App.BLL
         {
             _appDal.DeleteUser(UserId, UserCd);
         }
-        
+
         public void DeleteLocalUser(string UserCd)
         {
             _appDal.DeleteLocalUser(UserCd);
