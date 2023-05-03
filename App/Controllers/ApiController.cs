@@ -1,4 +1,6 @@
-﻿using App.BLL;
+﻿using App.Attributes;
+using App.BLL;
+using App.Model;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -26,10 +28,9 @@ namespace App.Controllers
     // 405 : 요청한 리소스에서 사용 불가능한 Method 입니다.
     // 500 : 서버 문제
 
-#if !DEBUG
-    [ApiKey]
-#endif
-
+//#if !DEBUG
+//    [ApiKey]
+//#endif
     [Route("/v1/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
@@ -112,6 +113,21 @@ namespace App.Controllers
             _AppBll.GrantAuthorizationUser(UserEmails, UserAuthorization);
 
             return Redirect("~/Admin/Index");
+        }
+
+        /// <summary>
+        /// 사용자(User) 비밀번호 초기화
+        /// </summary>
+        /// <param name="UserCd">사용자 ID</param>
+        /// <param name="UserPw">교체 PW</param>
+        /// <returns></returns>
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/password")]
+        [HttpPut]
+        public IActionResult ResetUserPassword(string UserId, string UserPw)
+        {
+            _AppBll.UpdateIdentityUserPassword(UserId, UserPw);
+
+            return Ok();
         }
 
         /// <summary>

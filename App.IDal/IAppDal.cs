@@ -32,6 +32,7 @@ namespace App.IDAL
         public void DeleteRole(string RoleName);
         public void CreateRole(string RoleId, string RoleNm);
         public void UpdateRole(string RoleId, string RoleNm);
+        public void UpdateIdentityUserPassword(string UserId, string Password);
 
         #endregion
     }

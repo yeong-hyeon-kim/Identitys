@@ -112,7 +112,7 @@ namespace App.Areas.Identity.Pages.Account
                     switch (error.Code)
                     {
                         case "PasswordRequiresNonAlphanumeric":
-                            error.Description = "비밀번호에는 영숫자가 아닌 문자가 하나 이상 있어야 합니다.";
+                            error.Description = "비밀번호에는 특수 문자가 포함되어야 합니다.";
                             break;
                         case "PasswordRequiresLower":
                             error.Description = "비밀번호에는 소문자가 포함되어야 합니다.";

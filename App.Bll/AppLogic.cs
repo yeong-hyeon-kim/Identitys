@@ -68,6 +68,11 @@ namespace App.BLL
             _appDal.CreateIdentityUser(UserId, Email, UserPassword, EmailConfirmation);
         }
 
+        public void UpdateIdentityUserPassword(string UserId, string Password)
+        {
+            _appDal.UpdateIdentityUserPassword(UserId, Password);
+        }
+
         public void UpdateUser(string UserCd, string UserDept, string UserContact)
         {
             _appDal.UpdateUser(UserCd, UserDept, UserContact);
