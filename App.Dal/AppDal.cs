@@ -117,6 +117,58 @@ namespace App.DAL
             }
         }
 
+        public void CreateUser(string UserId, string UserPw, bool _EmailConfirmed)
+        {
+            var user = new IdentityUser { 
+                UserName = UserId, Email = UserId ,
+                NormalizedEmail = UserId.ToUpper(),
+                NormalizedUserName = UserId.ToUpper(),
+                EmailConfirmed = _EmailConfirmed,
+                
+            };
+
+            // Identity PhoneNumber
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    var Model = user;
+                    db.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 사용자 비밀번호 초기화
+        /// </summary>
+        /// <param name="UserId">사용자 ID</param>
+        /// <param name="UserPw">대체 PW</param>
+        public void UpdateIdentityUserPassword(string UserId, string UserPw)
+        {
+            // Identity PhoneNumber
+            using (var db = _identity_context)
+            {
+                try
+                {
+                    if (!string.IsNullOrEmpty(UserId))
+                    {
+                        var Model = db.Users.First(x => x.Email.Equals(UserId));
+                        Model.PasswordHash = GeneratePasswordHash(UserPw);
+
+                        db.SaveChanges();
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.Message);
+                }
+            }
+        }
+
         /// <summary>
         /// 사용자 정보 업데이트
         /// </summary>

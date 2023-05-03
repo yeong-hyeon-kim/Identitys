@@ -1,27 +1,27 @@
 version: "3.7"
 services:
   app:
-    container_name: ASPNetCore
-    hostname: ASPNetCore
+    container_name: aspcore
+    hostname: aspcore
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      # Http-Host:Container
+      - "9080:443"
       - "8080:80"
-      # Https-Host:Container
-      - "9090:443"
     depends_on:
       - sqlserver
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
   sqlserver:
     image: mcr.microsoft.com/mssql/server:2022-latest
-    user: sa
-    container_name: SQL-Server
-    hostname: SQL-Server
+    user: root
+    container_name: sqlserver
+    hostname: sqlserver
     ports:
-      - Host:Container
+      - 2222:1433
     volumes:
       - ./sqldata:/var/opt/sql-server
     environment:
       ACCEPT_EULA: Y
-      SA_PASSWORD: Password
+      SA_PASSWORD: root1234!!
