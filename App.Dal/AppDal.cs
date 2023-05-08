@@ -83,7 +83,7 @@ namespace App.DAL
         }
 
         /// <summary>
-        /// 사용자 등록
+        /// 로컬 사용자 등록
         /// </summary>
         /// <param name="UserCd">사용자 코드</param>
         /// <param name="UserNm">이름</param>
@@ -109,31 +109,6 @@ namespace App.DAL
                         db.Add(new Users { USER_CD = UserCd, USER_NM = UserNm, USER_DEPT = UserDept, USER_EMAIL = UserEmail, USER_CONTACT = UserContact });
                         db.SaveChanges();
                     }
-                }
-                catch (Exception e)
-                {
-                    Debug.WriteLine(e.Message);
-                }
-            }
-        }
-
-        public void CreateUser(string UserId, string UserPw, bool _EmailConfirmed)
-        {
-            var user = new IdentityUser { 
-                UserName = UserId, Email = UserId ,
-                NormalizedEmail = UserId.ToUpper(),
-                NormalizedUserName = UserId.ToUpper(),
-                EmailConfirmed = _EmailConfirmed,
-                
-            };
-
-            // Identity PhoneNumber
-            using (var db = _identity_context)
-            {
-                try
-                {
-                    var Model = user;
-                    db.SaveChanges();
                 }
                 catch (Exception e)
                 {
