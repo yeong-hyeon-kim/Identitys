@@ -1,6 +1,4 @@
-﻿using App.Attributes;
-using App.BLL;
-using App.Model;
+﻿using App.BLL;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 
@@ -28,9 +26,9 @@ namespace App.Controllers
     // 405 : 요청한 리소스에서 사용 불가능한 Method 입니다.
     // 500 : 서버 문제
 
-//#if !DEBUG
-//    [ApiKey]
-//#endif
+    //#if !DEBUG
+    //    [ApiKey]
+    //#endif
     [Route("/v1/[action]")]
     [ApiController]
     public class ApiController : ControllerBase
