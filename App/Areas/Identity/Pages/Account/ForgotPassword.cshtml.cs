@@ -66,11 +66,12 @@ namespace App.Areas.Identity.Pages.Account
                     $"</head>" +
                     $"<body>" +
                     $"    <header>" +
-                    $"        <h2 id='H-Title'>💌 ASP NET Core Email Service</h2>" +
+                    $"        <h2 id='H-Title'>💌 Email Service</h2>" +
                     $"    </header>" +
                     $"    <section>" +
                     $"        <h2>비밀번호 변경(Set Password)</h2>" +
-                    $"        <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' class='btn btn-primary'>이곳을 선택해주세요(Here Click)!</a>" +
+                    $"        <p> 🤖 안녕하세요 비밀번호 초기화 서비스 봇 입니다.</p>" +
+                    $"        <a href='{HtmlEncoder.Default.Encode(callbackUrl)}' class='btn btn-primary'>비밀번호를 초기화 하시려면 이곳을 선택해주세요(Here Click)!</a><br>" +
                     $"        <div id='Not-Reply'>" +
                     $"            <p>이 메일은 발신 전용이므로 회신하실 수 없습니다.🙏</p>" +
                     $"            <p>You cannot reply to this e-mail because it is for outgoing use only.</p>" +
@@ -78,13 +79,13 @@ namespace App.Areas.Identity.Pages.Account
                     $"    </section>" +
                     $"    <hr>" +
                     $"    <footer>" +
-                    $"        <p>© ASP Net Core Identitys</p>" +
+                    $"        <p>copyright ©Identitys {DateTime.Now.Year}</p>" +
                     $"    </footer>" +
                     $"</body>" +
                     $"</html>";
 
                 await _emailSender.SendEmailAsync(
-                    Input.Email, "Forgot Password", HtmlString);
+                    Input.Email, "[Email Service] Forgot Password", HtmlString);
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
