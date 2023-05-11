@@ -29,14 +29,20 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("ADMIN", builder => builder
+        .RequireRole("ADMIN"));
+});
+
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<AppLogic>();
-// ÀÇÁ¸¼º ÁÖÀÔ(DI) : »óÀ§(ÀÎÅÍÆäÀÌ½º) Å¸ÀÔÀ¸·Î ÇÏÀ§(Å¬·¡½º) Å¸ÀÔÀ» »ı¼ºÇÕ´Ï´Ù.
+// ì˜ì¡´ì„± ì£¼ì…(DI) : ìƒìœ„(ì¸í„°í˜ì´ìŠ¤) íƒ€ì…ìœ¼ë¡œ í•˜ìœ„(í´ë˜ìŠ¤) íƒ€ì…ì„ ìƒì„±í•©ë‹ˆë‹¤.
 
-/* »ı¸í ÁÖ±â */
-// Transient : ¿äÃ» ¹ŞÀ» ¶§¸¶´Ù »ı¼ºÇÕ´Ï´Ù.
-// Scoped    : ¿äÃ» ´ç ÇÑ ¹ø »ı¼ºÇÕ´Ï´Ù.
-// Singleton : Ã³À½À¸·Î ¿äÃ» ¹ŞÀ» ¶§¿¡ »ı¼º. ÀÌÈÄÀÇ ¿äÃ»µéÀº ÃÖÃÊ¿¡ »ı¼ºµÈ ÀÎ½ºÅÏ½º¸¦ »ç¿ëÇÕ´Ï´Ù.
+/* ìƒëª… ì£¼ê¸° */
+// Transient : ìš”ì²­ ë°›ì„ ë•Œë§ˆë‹¤ ìƒì„±í•©ë‹ˆë‹¤.
+// Scoped    : ìš”ì²­ ë‹¹ í•œ ë²ˆ ìƒì„±í•©ë‹ˆë‹¤.
+// Singleton : ì²˜ìŒìœ¼ë¡œ ìš”ì²­ ë°›ì„ ë•Œì— ìƒì„±. ì´í›„ì˜ ìš”ì²­ë“¤ì€ ìµœì´ˆì— ìƒì„±ëœ ì¸ìŠ¤í„´ìŠ¤ë¥¼ ì‚¬ìš©í•©ë‹ˆë‹¤.
 builder.Services.AddTransient<IAppDal, AppDal>();
 
 // Emali Sender Provider Settings
