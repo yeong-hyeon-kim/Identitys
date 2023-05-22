@@ -710,9 +710,16 @@ namespace App.DAL
                         foreach (var item in LockList)
                         {
                             string UserEmail = item.Email.ToString();
-                            LockUserList = db.USERS.Where(x => x.USER_EMAIL.Equals(UserEmail)).ToList();
-
-                            return LockUserList;
+                            var users = db.USERS.Where(x => x.USER_EMAIL.Equals(UserEmail)).ToList().First();
+                            
+                            LockUserList.Add(new Users { 
+                                USER_CD = users.USER_CD, 
+                                USER_NM = users.USER_NM, 
+                                USER_EMAIL = users.USER_EMAIL, 
+                                USER_CONTACT = users.USER_CONTACT, 
+                                USER_DEPT = users.USER_DEPT, 
+                                REMARK = users.REMARK, 
+                            });
                         }
                     }
                 }
