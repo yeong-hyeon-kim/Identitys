@@ -66,6 +66,14 @@ namespace App.DAL
             }
         }
 
+        /// <summary>
+        /// Identity 사용자 계정 생성
+        /// </summary>
+        /// <param name="UserId">사용자 ID</param>
+        /// <param name="Email">이메일</param>
+        /// <param name="UserPassword">비밀번호</param>
+        /// <param name="EmailConfirmation">비밀번호 확인</param>
+
         public void CreateIdentityUser(string UserId, string Email, string UserPassword, bool EmailConfirmation)
         {
             using (var db = _identity_context)
@@ -592,9 +600,9 @@ namespace App.DAL
                     // 특정 역할과 일치하지 않는 역할 조회
                     listUserRole = listUserRole.Where(x => !x.RoleId.Equals(listRole.Id)).ToList();
 
-                    // 사용자 Id
+                    // 사용자 ID
                     Model.UserId = listUser.Id;
-                    // 역할 Id
+                    // 역할 ID
                     Model.RoleId = listUserRole.First().RoleId;
 
                     db.UserRoles.Remove(Model);
@@ -711,14 +719,15 @@ namespace App.DAL
                         {
                             string UserEmail = item.Email.ToString();
                             var users = db.USERS.Where(x => x.USER_EMAIL.Equals(UserEmail)).ToList().First();
-                            
-                            LockUserList.Add(new Users { 
-                                USER_CD = users.USER_CD, 
-                                USER_NM = users.USER_NM, 
-                                USER_EMAIL = users.USER_EMAIL, 
-                                USER_CONTACT = users.USER_CONTACT, 
-                                USER_DEPT = users.USER_DEPT, 
-                                REMARK = users.REMARK, 
+
+                            LockUserList.Add(new Users
+                            {
+                                USER_CD = users.USER_CD,
+                                USER_NM = users.USER_NM,
+                                USER_EMAIL = users.USER_EMAIL,
+                                USER_CONTACT = users.USER_CONTACT,
+                                USER_DEPT = users.USER_DEPT,
+                                REMARK = users.REMARK,
                             });
                         }
                     }
@@ -735,8 +744,8 @@ namespace App.DAL
         /// <summary>
         /// 사용자 이메일 검증 여부(비밀번호 초기화 메일 전송 이용)
         /// </summary>
-        /// <param name="UserEmail"></param>
-        /// <param name="IsConfirm"></param>
+        /// <param name="UserEmail">사용자 이메일</param>
+        /// <param name="IsConfirm">이메일 확인 여부</param>
         public void SetEmailConfirm(string UserEmail, bool IsConfirm)
         {
             try
@@ -746,7 +755,6 @@ namespace App.DAL
                     var Model = db.Users.First(x => x.Email.Equals(UserEmail));
 
                     Model.EmailConfirmed = IsConfirm;
-
                     if (Model != null)
                     {
                         db.Users.Update(Model);
@@ -789,8 +797,8 @@ namespace App.DAL
         /// <summary>
         /// 역할(권한) 업데이트
         /// </summary>
-        /// <param name="RoleId">Identity Role Id</param>
-        /// <param name="RoleNm">Identity Role Name</param>
+        /// <param name="RoleId">Identity 역할 ID</param>
+        /// <param name="RoleNm">Identity 역할 명</param>
         public void UpdateRole(string RoleId, string RoleNm)
         {
             using (var db = _identity_context)
@@ -814,8 +822,8 @@ namespace App.DAL
         /// <summary>
         /// 역할(권한) 추가
         /// </summary>
-        /// <param name="RoleId">Role Id</param>
-        /// <param name="RoleNm"></param>
+        /// <param name="RoleId">역할 ID</param>
+        /// <param name="RoleNm">역할 명</param>
         public void CreateRole(string RoleId, string RoleNm)
         {
             using (var db = _identity_context)
@@ -850,7 +858,7 @@ namespace App.DAL
         /// <summary>
         /// 역할(권한) 제거
         /// </summary>
-        /// <param name="RoleId"></param>
+        /// <param name="RoleId">역할 ID</param>
         public void DeleteRole(string RoleId)
         {
             try
