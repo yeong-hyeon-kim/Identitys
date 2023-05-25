@@ -42,6 +42,13 @@ namespace App.Controllers
         }
 
         #region 사용자(User)
+        /// <summary>
+        /// 사용자 생성
+        /// </summary>
+        /// <param name="UserId">사용자 ID</param>
+        /// <param name="UserPassword">사용자 PW</param>
+        /// <param name="EmailConfirmation">이메일 검증 여부</param>
+        /// <returns></returns>
         [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         [HttpPost]
         public IActionResult CreateUser(string UserId, string UserPassword, bool EmailConfirmation)
@@ -63,6 +70,10 @@ namespace App.Controllers
             return Ok(JsonConvert.SerializeObject(_AppBll.GetUser(UserEmail)));
         }
 
+        /// <summary>
+        /// 사용자(User) 목록 조회
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         public IActionResult GetUserList()
@@ -85,6 +96,11 @@ namespace App.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// 로컬 사용자 제거
+        /// </summary>
+        /// <param name="UserCd">사용자 CD</param>
+        /// <returns></returns>
         [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/local")]
         [HttpDelete]
         public IActionResult RemoveLocalUser(string UserCd)
@@ -97,11 +113,11 @@ namespace App.Controllers
         /// <summary>
         /// 사용자(User) 수정
         /// </summary>
-        /// <param name="UserCd"></param>
-        /// <param name="UserEmails"></param>
-        /// <param name="UserDept"></param>
-        /// <param name="UserContact"></param>
-        /// <param name="UserAuthorization"></param>
+        /// <param name="UserCd">사용자 CD</param>
+        /// <param name="UserEmails">이메일</param>
+        /// <param name="UserDept">부서</param>
+        /// <param name="UserContact">연락처</param>
+        /// <param name="UserAuthorization">역할</param>
         /// <returns></returns>
         [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user")]
         [HttpPut]
@@ -116,7 +132,7 @@ namespace App.Controllers
         /// <summary>
         /// 사용자(User) 비밀번호 초기화
         /// </summary>
-        /// <param name="UserCd">사용자 ID</param>
+        /// <param name="UserId">사용자 ID</param>
         /// <param name="UserPw">교체 PW</param>
         /// <returns></returns>
         [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/password")]
@@ -132,7 +148,7 @@ namespace App.Controllers
         /// 역할(Role)이 없는 사용자(User) 조회
         /// </summary>
         /// <returns></returns>
-        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/role/null")]
+        [ApiExplorerSettings(GroupName = "사용자(User)"), Route($"/{API_VERSION}/identity/user/role/null")]
         [HttpGet]
         public IActionResult GetIdentityNullRoleUsers()
         {
@@ -203,8 +219,8 @@ namespace App.Controllers
         /// <summary>
         /// 역할(Role) 등록
         /// </summary>
-        /// <param name="RoleId"></param>
-        /// <param name="RoleName"></param>
+        /// <param name="RoleId">역할 ID</param>
+        /// <param name="RoleName">역할 이름</param>
         /// <returns></returns>
         [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpPost]
@@ -219,7 +235,7 @@ namespace App.Controllers
         /// 역할(Role) 수정
         /// </summary>
         /// <param name="RoleId">역할 ID</param>
-        /// <param name="RoleName">역할 명</param>
+        /// <param name="RoleName">역할 이름</param>
         /// <returns></returns>
         [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpPut]
@@ -233,7 +249,7 @@ namespace App.Controllers
         /// <summary>
         /// 역할(Role) 제거
         /// </summary>
-        /// <param name="RoleId"></param>
+        /// <param name="RoleId">역할 ID</param>
         /// <returns></returns>
         [ApiExplorerSettings(GroupName = "역할(Role)"), Route($"/{API_VERSION}/identity/role")]
         [HttpDelete]
