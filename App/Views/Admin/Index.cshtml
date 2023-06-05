@@ -11,19 +11,25 @@
         <div class="DataViewHeader">
             <h3>사용자 관리</h3>
             <hr />
-            
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <div>
                     <input type="search" placeholder="검색" aria-label="Search" oninput="searchText(this.value)">
                 </div>
-                <button type="button" class="btn btn-warning btn-sm" onclick="locationAccountRegisterPage()">사용자
-                    등록</button>
+                <button type="button" class="btn btn-warning btn-sm" onclick="locationAccountRegisterPage()">
+                    사용자
+                    등록
+                </button>
                 <button type="button" class="btn btn-success btn-sm" onclick="locationRolesListPage()">권한 조회</button>
                 <button type="button" class="btn btn-info btn-sm" onclick="locationLockListPage()">잠긴 계정 조회</button>
-                <button type="button" class="btn btn-danger btn-sm" onclick="locationAuthorizationPage()">미승인
-                    사용자</button>
-                <button type="button" class="btn btn-primary btn-sm" onclick="locationRegisteredListPage()">미등록
-                    사용자</button>
+                <button type="button" class="btn btn-danger btn-sm" onclick="locationAuthorizationPage()">
+                    미승인
+                    사용자
+                </button>
+                <button type="button" class="btn btn-primary btn-sm" onclick="locationRegisteredListPage()">
+                    미등록
+                    사용자
+                </button>
             </div>
         </div>
 
@@ -102,7 +108,9 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormUpdateUserInfo"
-                    onclick=RequestUpdateUserInfomation()>등록</button>
+                        onclick=RequestUpdateUserInfomation()>
+                    등록
+                </button>
             </div>
         </div>
     </div>
@@ -120,20 +128,22 @@
                     <div class="mb-3">
                         <label for="UserNm" class="form-label">User CD</label>
                         <input type="text" class="form-control" id="RemoveUserCd" name="UserCd" rows="3" required
-                            readonly>
+                               readonly>
                     </div>
 
                     <div class="mb-3">
                         <label for="UserId" class="form-label">User ID</label>
                         <input type="text" class="form-control" id="RemoveUserId" name="UserEmail" rows="3" required
-                            readonly>
+                               readonly>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormRemoveUser"
-                    onclick="RequestDeleteUser()">삭제</button>
+                        onclick="RequestDeleteUser()">
+                    삭제
+                </button>
             </div>
         </div>
     </div>
@@ -145,27 +155,27 @@
         RequestAuthorizationList();
     }());
 
-    function searchText(itme){
-        let TableRows =  $("#TableList").find("tr")
+    function searchText(itme) {
+        let TableRows = $("#TableList").find("tr")
 
-        for(var i = 0; i < TableRows.length; i++){
+        for (var i = 0; i < TableRows.length; i++) {
             if (TableRows[i].innerText.includes(itme)) {
                 if (itme.trim() === '') {
                     TableRows[i].bgColor = ''
-                }else{
+                } else {
                     TableRows[i].bgColor = '#87CEFA'
                 }
-            }else{
+            } else {
                 TableRows[i].bgColor = ''
             }
         }
     }
 
-    function displayDataView(data){
+    function displayDataView(data) {
         let html = "";
         $("#TableList tr").empty();
 
-        if(Object.keys(data).length != 0){
+        if (Object.keys(data).length != 0) {
             for (var i = 0; i < Object.keys(data).length; i++) {
                 html += "<tr>"
                 html += `<td id=USER_ID_${data[i]['USER_CD']}>${data[i]['USER_ID']}</td>`
@@ -193,14 +203,14 @@
                 html += `</td>`
                 html += "</tr>"
             }
-        }else{
+        } else {
             html += "<tr>"
             html += "<td colspan='9' id='DataViewNull' class='text-center DataViewNull'>"
             html += "<h5>조회된 데이터가 없습니다.⚠</h5>"
             html += "</td>"
             html += "</tr>"
         }
-        
+
         $("#TableList").append(html);
     }
 
