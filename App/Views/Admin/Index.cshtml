@@ -12,6 +12,8 @@
             <h3>사용자 관리</h3>
             <hr />
 
+            <h4 id="UserCount"></h4>
+
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                 <div>
                     <input type="search" placeholder="검색" aria-label="Search" oninput="searchText(this.value)">
@@ -173,7 +175,11 @@
 
     function displayDataView(data) {
         let html = "";
+        let UserCount = Object.keys(data).length;
+
         $("#TableList tr").empty();
+
+        document.getElementById('UserCount').innerText = UserCount + "명";
 
         if (Object.keys(data).length != 0) {
             for (var i = 0; i < Object.keys(data).length; i++) {
