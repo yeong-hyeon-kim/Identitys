@@ -49,6 +49,7 @@
                         <th scope="col">권한</th>
                         <th scope="col"></th>
                         <th scope="col"></th>
+                        <th scope="col"></th>
                     </tr>
                 </thead>
 
@@ -152,6 +153,38 @@
     </div>
 </div>
 
+<div class="modal fade" id="LockUserModal" tabindex="-1" aria-labelledby="LockUserModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">사용자 잠금</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form asp-controller="Admin" asp-action="SetUserLock" id="FormLockUser">
+                    <div class="mb-3">
+                        <label for="UserCd" class="form-label">User CD</label>
+                        <input type="text" class="form-control" id="LockUserCd" name="LockUserCd" rows="3" required
+                               readonly>
+
+                        <div class="mb-3">
+                            <label for="UserNm" class="form-label">Lock Date</label>
+                            <input type="date" class="form-control" id="LockUserCd" name="LockDate" rows="3">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" form="FormLockUser"
+                        onclick="RequestLockUser()">
+                    잠금
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
     (function () {
         RequestUserList();
@@ -206,6 +239,14 @@
                 html += `<button type='button' class='btn btn-outline-danger' data-bs-toggle="modal" data-bs-target="#RemoveConfirmModal" data-bs-whatever="${data[i]['USER_CD']}">`
                 html += `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>`
                 html += `<path d='M8.086 2.207a2 2 0 0 1 2.828 0l3.879 3.879a2 2 0 0 1 0 2.828l-5.5 5.5A2 2 0 0 1 7.879 15H5.12a2 2 0 0 1-1.414-.586l-2.5-2.5a2 2 0 0 1 0-2.828l6.879-6.879zm2.121.707a1 1 0 0 0-1.414 0L4.16 7.547l5.293 5.293 4.633-4.633a1 1 0 0 0 0-1.414l-3.879-3.879zM8.746 13.547 3.453 8.254 1.914 9.793a1 1 0 0 0 0 1.414l2.5 2.5a1 1 0 0 0 .707.293H7.88a1 1 0 0 0 .707-.293l.16-.16z' />`
+                html += `</svg>`
+                html += `</button>`
+                html += `</td>`
+
+                html += `<td class="text-center">`
+                html += `<button type='button' class='btn btn-outline-warning' data-bs-toggle="modal" data-bs-target="#LockUserModal" data-bs-whatever="${data[i]['USER_CD']}">`
+                html += `<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus-square' viewBox='0 0 16 16'>`
+                html += `<path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2zM5 8h6a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/>`
                 html += `</svg>`
                 html += `</button>`
                 html += `</td>`
@@ -273,5 +314,28 @@
         }
 
         $("#RemoveUser").attr("onclick", "requestRemoveUser('" + recipient + "')");
+    })
+
+    // 사용자 잠금 확인 다이얼로그
+    let LockUserModal = document.getElementById('LockUserModal')
+    LockUserModal.addEventListener('show.bs.modal', function (event) {
+        let modalTitle = RemoveUserModal.querySelector('.modal-title')
+        modalTitle.textContent = '알림'
+
+        let button = event.relatedTarget;
+        let recipient = button.getAttribute('data-bs-whatever')
+        recipient = $("#USER_ID_" + recipient).text() + "##" + recipient;
+
+        $("#LockUserCd").val($("#USER_ID").text());
+        $("#LockUserId").val($("#USER_EMAIL").text());
+
+        if (recipient !== "##null") {
+            let UserCd = recipient.split("##")[0];
+            let UserId = $("#USER_EMAILS_" + recipient.split("##")[1]).text();
+            $("#LockUserCd").val(UserCd);
+            $("#LockUserId").val(UserId);
+        }
+
+        $("#LockUser").attr("onclick", "requestLockUser('" + recipient + "')");
     })
 </script>

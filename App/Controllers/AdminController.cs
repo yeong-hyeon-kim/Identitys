@@ -114,5 +114,13 @@ namespace App.Controllers
 
             return Redirect("~/Admin/LockList");
         }
+
+        [HttpPost]
+        public IActionResult SetUserLock(string LockUserCd, string LockDate)
+        {
+            _AppBll.LockingUser(LockUserCd, DateTime.Parse(LockDate));
+
+            return Redirect("~/Admin/Index");
+        }
     }
 }
