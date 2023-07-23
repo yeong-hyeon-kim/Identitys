@@ -3,6 +3,7 @@ using App.IDAL;
 using App.Model;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Security.Cryptography;
 
@@ -41,6 +42,30 @@ namespace App.DAL
             return hashed;
         }
 
+        /// <summary>
+        /// 동적 모델 리스트 조회 
+        /// </summary>
+        /// <param name="context">컨텍스트</param>
+        /// <param name="entityTypeName">모델 네임스페이스</param>
+        /// <returns></returns>
+        public dynamic GetList(DbContext context, string entityTypeName)
+        {
+            // get type of entity / MyIdentityModel.IdentityRole
+            Type entityType = Type.GetType(entityTypeName);
+            // Get Method Set<MyIdentityModel.IdentityRole>
+            var setMethod = context.GetType().GetMethod(nameof(DbContext.Set), new Type[] { }).MakeGenericMethod(entityType);
+            // Calling context.Set<MyIdentityModel.IdentityRole>
+            var dbSet = setMethod.Invoke(context, new object[] { });
+            /* Call to another methods using reflection before calling "ToList" 
+                Eg. example Where, Include, Select
+            */
+            //get Extension Method "ToList<MyIdentityModel.IdentityRole>"
+            var toListMethod = typeof(Enumerable).GetMethod("ToList").MakeGenericMethod(entityType);
+            //Calling "context.Set<MyIdentityModel.IdentityRole>.ToList<MyIdentityModel.IdentityRole>()" Method and convert to destination type if is possible.
+            var list = toListMethod.Invoke(null, new object[] { dbSet });
+            return list;
+        }
+
         #region 사용자
         /// <summary>
         /// 사용자 조회
@@ -50,11 +75,14 @@ namespace App.DAL
         public List<Users> GetUser(string UserEmail)
         {
             List<Users> UserList = new List<Users>();
-
+              
             using (var db = new AppDbContext())
             {
                 try
                 {
+                    // 다른 프로젝트의 라이브러리 타입을 가져올때는 "네임스페이스.클래스, 프로젝트 이름" 으로 조회
+                    var list = GetList(db, "App.Model.Users, App.Model");
+
                     // 사용자 정보 테이블에서 일치하는 내용 반환. 
                     return UserList = db.USERS.Where(x => x.USER_EMAIL == UserEmail).ToList();
                 }
